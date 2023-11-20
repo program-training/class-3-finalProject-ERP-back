@@ -4,7 +4,7 @@ import productsRouter from "./products/router";
 const router = express.Router();
 
 
-router.use('/products',productsRouter)
+router.use('/api/inventory',productsRouter)
 router.use('/users',usersRouter)
 
 
