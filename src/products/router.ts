@@ -1,8 +1,7 @@
 import express from "express";
-import { rrrrrrrr } from "./controllers/productsControllers";
 const productsRouter = express.Router();
 
-productsRouter.get("/", rrrrrrrr);
+productsRouter.get("/",);
 productsRouter.get("/:id", );
 productsRouter.get("/?search={searchText}", );
 productsRouter.get(" /:id", );
