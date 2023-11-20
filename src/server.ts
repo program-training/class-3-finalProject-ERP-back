@@ -2,7 +2,6 @@ import express from "express";
 import {corsOrigin as cors} from './cors/cors';
 import router from "./router";
 import { connectToDatabase } from "./configuration/mongoDB";
-import { ProductModel } from "./configuration/userSchema";
 import dotenv from 'dotenv';
 
 dotenv.config();

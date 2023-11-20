@@ -1,19 +1,20 @@
 import express from "express";
 const productsRouter = express.Router();
-
-productsRouter.get("/",);
-productsRouter.get("/:id", );
-productsRouter.get("/?search={searchText}", );
-productsRouter.get(" /:id", );
-
-
-productsRouter.post("/api/inventory", );
-productsRouter.post("/api/shop_inventory/updateInventory", );
+import {
+    allProducts
+} from "./controllers/productsControllers";
+// productsRouter.get("/", allProducts);
+productsRouter.get("/:id",);
+productsRouter.get("/", allProducts);
 
 
-productsRouter.put("/api/inventory/:id", );
+productsRouter.post("/api/inventory",);
+productsRouter.post("/api/shop_inventory/updateInventory",);
 
-productsRouter.delete("/api/inventory/:id", );
+
+productsRouter.put("/api/inventory/:id",);
+
+productsRouter.delete("/api/inventory/:id",);
 
 
 export default productsRouter;
