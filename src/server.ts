@@ -1,10 +1,14 @@
 import { Request, Response } from 'express';
 import express from "express";
-import cors from "cors";
+import {corsOrigin as cors} from './cors/cors';
 import router from "./router";
 import { connectToDatabase } from "./configuration/mongoDB";
 import { ProductModel } from "./configuration/userSchema";
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+const port = process.env.PORT;
 const app = express();
 
 
@@ -15,9 +19,9 @@ app.get("/app",(req:Request,res:Response)=>{
   res.json("gilad")
 })
 
-app.listen(3009, async () => {
+app.listen(port, async () => {
   await connectToDatabase()
-  console.log(`Server is up and running on port 3009`);
+  console.log(`Server is up and running on port ${port}`);
 });
 
 +
