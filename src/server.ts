@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import express from "express";
 import {corsOrigin as cors} from './cors/cors';
 import router from "./router";
@@ -9,14 +10,18 @@ dotenv.config();
 const port = process.env.PORT;
 const app = express();
 
-app.use(cors);
+
 app.use(express.json());
 app.use(router)
+app.get("/app",(req:Request,res:Response)=>{
+  console.log("gilad")
+  res.json("gilad")
+})
 
 app.listen(port, async () => {
   await connectToDatabase()
   console.log(`Server is up and running on port ${port}`);
 });
 
-
++
 
