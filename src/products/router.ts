@@ -1,19 +1,26 @@
 import express from "express";
+import { updateInventoryController } from "./controllers/productsControllers";
+import {
+  getProductByIdController,
+  allProductsController,
+  deleteController,
+  NewProductsController,
+} from "./controllers/productsControllers";
 const productsRouter = express.Router();
 
-productsRouter.get("/",);
-productsRouter.get("/:id", );
-productsRouter.get("/?search={searchText}", );
-productsRouter.get(" /:id", );
+productsRouter.get("/", allProductsController);
+productsRouter.get("/:id", getProductByIdController);
+productsRouter.get("/?search={searchText}");
+productsRouter.get("/g/:id", getProductByIdController);
 
+productsRouter.post("/api/inventory", NewProductsController);
+productsRouter.post(
+  "/api/shop_inventory/updateInventory",
+  updateInventoryController
+);
 
-productsRouter.post("/api/inventory", );
-productsRouter.post("/api/shop_inventory/updateInventory", );
+productsRouter.put("/api/inventory/:id");
 
-
-productsRouter.put("/api/inventory/:id", );
-
-productsRouter.delete("/api/inventory/:id", );
-
+productsRouter.delete("/api/inventory/:id", deleteController);
 
 export default productsRouter;

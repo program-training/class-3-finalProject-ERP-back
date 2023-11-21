@@ -23,4 +23,7 @@ type User = InferSchemaType<typeof UserSchema>;
 type Product = InferSchemaType<typeof ProductSchema>;
 
 export const UserModel: Model<User> = mongoose.model<User>("user", UserSchema);
-export const ProductModel: Model<Product> = mongoose.model<Product>("Product", ProductSchema);
+export const ProductModel: Model<Product> = mongoose.model<Product>(
+  "Product",
+  ProductSchema
+);
