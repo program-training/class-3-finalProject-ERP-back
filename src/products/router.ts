@@ -6,8 +6,6 @@ import {
 // productsRouter.get("/", allProducts);
 productsRouter.get("/:id",);
 productsRouter.get("/", allProducts);
-
-
 productsRouter.post("/api/inventory",);
 productsRouter.post("/api/shop_inventory/updateInventory",);
 
