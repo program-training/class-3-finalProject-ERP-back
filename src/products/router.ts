@@ -19,7 +19,9 @@ productsRouter.post(
   updateInventoryController
 );
 
-productsRouter.put("/api/inventory/:id");
+productsRouter.put("/api/inventory/:id",);
+
+productsRouter.delete("/api/inventory/:id",);
 
 productsRouter.delete("/api/inventory/:id", deleteController);
 
