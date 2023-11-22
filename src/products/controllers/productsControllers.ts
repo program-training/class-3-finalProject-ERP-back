@@ -3,8 +3,9 @@ import { getProductById } from "../service/productsService";
 import {
   updateInventoryServices,
   deleteServices,
+  editProductService,
 } from "../service/productsService";
-import { productUpdate } from "../../configuration/TypeUser";
+import { Product, productUpdate } from "../../configuration/TypeUser";
 import { getProduct } from "../service/productsService";
 import { newProductsServices } from "../service/productsService";
 
@@ -53,6 +54,19 @@ export const deleteController = async (req: Request, res: Response) => {
 export const NewProductsController = async (req: Request, res: Response) => {
   try {
     const newProduct = await newProductsServices(req.body);
+    res.status(200).json(newProduct);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+export const editProductController = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const product = req.body as Product;
+  console.log("🚀 ~ file: productsControllers.ts:67 ~ editProductController ~ product:", product)
+  try {
+    const newProduct = await editProductService(product,id)
     res.status(200).json(newProduct);
   } catch (error: any) {
     res.status(500).json({ error: error.message });

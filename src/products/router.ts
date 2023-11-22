@@ -5,6 +5,7 @@ import {
   allProductsController,
   deleteController,
   NewProductsController,
+  editProductController,
 } from "./controllers/productsControllers";
 const productsRouter = express.Router();
 
@@ -19,7 +20,7 @@ productsRouter.post(
   updateInventoryController
 );
 
-productsRouter.put("/api/inventory/:id",);
+productsRouter.put("/:id", editProductController);
 
 productsRouter.delete("/api/inventory/:id",);
 

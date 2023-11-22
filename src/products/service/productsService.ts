@@ -1,6 +1,6 @@
 import { getProductFromDB, getProductDall } from "../dall/productsDall";
 import { productUpdate } from "../../configuration/TypeUser";
-import { updateDall, deleteDall, newProductsDall } from "../dall/productsDall";
+import { updateDall, deleteDall, newProductsDall , editProductDall} from "../dall/productsDall";
 import { Product } from "../../configuration/TypeUser";
 
 export const getProductById = async (id: string) => {
@@ -55,6 +55,16 @@ export const newProductsServices = async (product: Product) => {
   try {
     const newProduct = await newProductsDall(product);
     return newProduct;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const editProductService = async (product: Product, id:string) => {
+  try {
+    const newProduct = await editProductDall(product, id);
+    if (!product) throw new Error("no  product in the database");
+    return product;
   } catch (error) {
     return Promise.reject(error);
   }
