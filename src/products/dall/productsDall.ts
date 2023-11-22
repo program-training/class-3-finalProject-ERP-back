@@ -61,3 +61,14 @@ export const editProductDall = async (product:Product, id: string) => {
     throw err
   }
 };
+
+/// categories
+
+export const getCategoryDall = async (categoryName) => {
+  try {
+    const product = await ProductModel.find({})
+    return product
+  } catch (err) {
+    throw err
+  }
+};

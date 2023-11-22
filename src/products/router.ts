@@ -6,6 +6,7 @@ import {
   deleteController,
   NewProductsController,
   editProductController,
+  getCategoryByNameController,
 } from "./controllers/productsControllers";
 const productsRouter = express.Router();
 
@@ -22,8 +23,9 @@ productsRouter.post(
 
 productsRouter.put("/:id", editProductController);
 
-productsRouter.delete("/api/inventory/:id",);
-
 productsRouter.delete("/api/inventory/:id", deleteController);
+ /// categories 
+productsRouter.get("/category/:name", getCategoryByNameController);
+
 
 export default productsRouter;
