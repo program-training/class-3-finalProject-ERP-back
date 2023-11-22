@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllProducts, updateInventoryController } from "../controllers/controllers";
+import { getAllProducts, updateInventoryController } from "../controllers/controllersExternalPoints";
 import { getProductByIdController } from "../../products/controllers/productsControllers";
 
 const externalPointsRouter = express.Router();

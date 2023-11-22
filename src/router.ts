@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import usersRouter from "./users/router";
 import productsRouter from "./products/router";
-import externalPointsRouter from "./externalPoints/router/router";
+import externalPointsRouter from "./externalPoints/router/routerExternalPoints";
 import { Authentication } from "./users/midelweres/Authentication";
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getProduct, getProductById } from "../../products/service/productsService";
-import { getProductByQuery, updateInventoryServices } from "../services/services";
+import { getProductByQuery, updateInventoryServices } from "../services/servicesExternalPoints";
 import { productUpdate } from "../../configuration/TypeUser";
 
 
