@@ -1,4 +1,4 @@
-import { ProductModel } from "../../configuration/userSchema";
+import { CategoryModel, ProductModel } from "../../configuration/userSchema";
 import { productUpdate } from "../../configuration/TypeUser";
 import { Product } from "../../configuration/TypeUser";
 
@@ -76,10 +76,10 @@ export const editProductDall = async (product:Product, id: string) => {
 
 /// categories
 
-export const getCategoryDall = async (categoryName) => {
+export const getCategoryDall = async (categoryID: string) => {
   try {
-    const product = await ProductModel.find({})
-    return product
+    const category = await CategoryModel.findById(categoryID)
+    return category
   } catch (err) {
     throw err
   }

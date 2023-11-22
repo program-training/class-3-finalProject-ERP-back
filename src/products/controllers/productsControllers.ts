@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import {
-  updateInventoryServices,
   deleteServices,
   editProductService,
-  getCategoryByName,
+  getCategoryById,
+  getProductById,
 } from "../service/productsService";
 import { Product, productUpdate } from "../../configuration/TypeUser";
 import { getProduct } from "../service/productsService";
@@ -65,10 +65,10 @@ export const editProductController = async (req: Request, res: Response) => {
 
 /// categories
 
-export const getCategoryByNameController = async (req: Request, res: Response) => {
-  const categoryName = req.params.name;
+export const getCategoryByIdController = async (req: Request, res: Response) => {
+  const categoryID = req.params.id;
   try {
-    const category = await getCategoryByName(categoryName);
+    const category = await getCategoryById(categoryID);
     res.status(200).json(category);
   } catch (error: any) {
     res.status(500).json({ error: error.message });

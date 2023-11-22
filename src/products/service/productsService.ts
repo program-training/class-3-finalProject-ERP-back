@@ -1,6 +1,6 @@
-import { getProductFromDB, getProductDall } from "../dall/productsDall";
+import { getProductFromDB, getProductDall, editProductDall, getCategoryDall } from "../dall/productsDall";
 import { productUpdate } from "../../configuration/TypeUser";
-import { updateDall, deleteDall, newProductsDall } from "../dall/productsDall";
+import { deleteDall, newProductsDall } from "../dall/productsDall";
 import { Product } from "../../configuration/TypeUser";
 
 export const getProductById = async (id: string) => {
@@ -61,9 +61,9 @@ export const editProductService = async (product: Product, id:string) => {
 
 /// categories
 
-export const getCategoryByName = async (categoryName: string) => {
+export const getCategoryById = async (categoryID: string) => {
   try {
-    const category = await getCategoryDall(categoryName);
+    const category = await getCategoryDall(categoryID);
     if (!category) throw new Error("no  category in the database");
     return category;
   } catch (error) {

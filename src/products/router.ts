@@ -5,7 +5,7 @@ import {
   getProductByIdController,
   NewProductsController,
   editProductController,
-  getCategoryByNameController,
+  getCategoryByIdController,
 } from "./controllers/productsControllers";
 const productsRouter = express.Router();
 
@@ -19,8 +19,8 @@ productsRouter.delete("/:id", deleteController);
 
 
  /// categories 
- 
-productsRouter.get("/category/:name", getCategoryByNameController);
+
+productsRouter.get("/category/:id", getCategoryByIdController);
 
 
 export default productsRouter;
