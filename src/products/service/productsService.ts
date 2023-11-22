@@ -1,6 +1,5 @@
 import { getProductFromDB, getProductDall } from "../dall/productsDall";
-import { productUpdate } from "../../configuration/TypeUser";
-import { updateDall, deleteDall, newProductsDall } from "../dall/productsDall";
+import {  deleteDall, newProductsDall } from "../dall/productsDall";
 import { Product } from "../../configuration/TypeUser";
 
 export const getProductById = async (id: string) => {
@@ -13,23 +12,7 @@ export const getProductById = async (id: string) => {
   }
 };
 
-export const updateInventoryServices = async (product: productUpdate) => {
-  const data = product;
-  try {
-    const dataProduct = await getProductFromDB(data.productId);
-    if (!dataProduct) throw new Error("no such product in the database");
-    const requiredQuantity = dataProduct.quantity - data.requiredQuantity;
-    if (requiredQuantity < 0) throw new Error("not enough in stock");
-    const productUpdate = {
-      productId: data.productId,
-      requiredQuantity: requiredQuantity,
-    };
-    const update = await updateDall(productUpdate);
-    return update;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+
 
 export const getProduct = async () => {
   try {
@@ -40,6 +23,9 @@ export const getProduct = async () => {
     return Promise.reject(error);
   }
 };
+
+
+
 
 export const deleteServices = async (id: string) => {
   try {
@@ -59,3 +45,5 @@ export const newProductsServices = async (product: Product) => {
     return Promise.reject(error);
   }
 };
+
+

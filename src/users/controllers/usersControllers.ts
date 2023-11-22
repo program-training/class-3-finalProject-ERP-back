@@ -9,7 +9,7 @@ import { getToken } from '../../services/apiServices';
 
 export const signUp = async (req: Request, res: Response) => {
     try {
-        const user = req.body as userData;
+        const user = req.body.userValid as userData;
         const result = await register(user)
         const token = await getToken(result)
         return res.status(200).send(token);
@@ -17,14 +17,13 @@ export const signUp = async (req: Request, res: Response) => {
         return res.status(500).send(err.message);
     }
 }
-
-export const logIn = async (req: Request, res: Response) =>{
-    try{
+export const logIn = async (req: Request, res: Response) => {
+    try {
         const user = req.body as userData;
         const token = await getToken(user)
         res.status(200).send(token)
     }
-    catch(err: any){
+    catch (err: any) {
         res.status(500).send(err.message)
-    }    
+    }
 }
