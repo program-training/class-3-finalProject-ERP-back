@@ -2,12 +2,13 @@ FROM node:lts-slim AS builder
 WORKDIR /app
 
 COPY package*.json tsconfig.json ./
+
 RUN npm install -g typescript
+RUN npm install
 
 COPY ./src ./src
-COPY ./tsconfig.json ./
 
-RUN npx tsc
+RUN tsc
 
 FROM node:lts-slim as artifact
 WORKDIR /app
@@ -15,7 +16,6 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
-RUN npm install
 
 ENV PORT=8181
 
