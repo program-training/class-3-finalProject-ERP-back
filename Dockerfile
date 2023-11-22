@@ -12,7 +12,7 @@ FROM node:lts-slim as artifact
 WORKDIR /app
 
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
+RUN npm install
 
 ENV PORT=8181
 
