@@ -4,9 +4,9 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { getUserByEmail } from "../users/dall/userDall";
 import { userData } from "../configuration/TypeUser";
 import { productUpdate } from "../configuration/TypeUser";
-// import { updateInventoryDall } from "../users/dall/userDall";
+import { secretKey } from "../configuration/jwt";
 
-const secretKey = 'gilad';
+
 export const getToken = async (user: userData) => {
     try {
         const usersFromDB = await getUserByEmail(user.user_name)

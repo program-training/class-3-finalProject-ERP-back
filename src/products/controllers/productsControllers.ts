@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
-import { getProductById } from "../service/productsService";
 import {
-  updateInventoryServices,
-  deleteServices,
+  deleteServices, getProductById,
 } from "../service/productsService";
 import { productUpdate } from "../../configuration/TypeUser";
 import { getProduct } from "../service/productsService";
 import { newProductsServices } from "../service/productsService";
+
+
+
 
 export const getProductByIdController = async (req: Request, res: Response) => {
   const id = req.params.id;
@@ -18,18 +19,6 @@ export const getProductByIdController = async (req: Request, res: Response) => {
   }
 };
 
-export const updateInventoryController = async (
-  req: Request,
-  res: Response
-) => {
-  const product = req.body as productUpdate;
-  try {
-    const data = await updateInventoryServices(product);
-    res.status(200).json(data);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-};
 
 export const allProductsController = async (req: Request, res: Response) => {
   try {
