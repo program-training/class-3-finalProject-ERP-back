@@ -13,10 +13,6 @@ const app = express();
 
 app.use(express.json());
 app.use(router)
-app.get("/app",(req:Request,res:Response)=>{
-  console.log("gilad")
-  res.json("gilad")
-})
 
 app.listen(port, async () => {
   await connectToDatabase()

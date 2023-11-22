@@ -1,4 +1,4 @@
-import { ProductModel } from "../../configuration/userSchema";
+import { CategoryModel, ProductModel } from "../../configuration/userSchema";
 import { productUpdate } from "../../configuration/TypeUser";
 import { Product } from "../../configuration/TypeUser";
 
@@ -59,6 +59,27 @@ export const newProductsDall = async (product: Product) => {
   try {
     const newProduct = await newUser.save()
     return newProduct
+  } catch (err) {
+    throw err
+  }
+};
+
+
+export const editProductDall = async (product:Product, id: string) => {
+  try {
+    const newProduct = await ProductModel.findByIdAndUpdate(id, product , { new: true })
+    return newProduct
+  } catch (err) {
+    throw err
+  }
+};
+
+/// categories
+
+export const getCategoryDall = async (categoryID: string) => {
+  try {
+    const category = await CategoryModel.findById(categoryID)
+    return category
   } catch (err) {
     throw err
   }
