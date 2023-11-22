@@ -12,17 +12,8 @@ export const getProductFromDB = async (productID: string) => {
   }
 };
 
-export const updateDall = async (product: productUpdate) => {
-  const data = product;
-  try {
-    const update = await ProductModel.findByIdAndUpdate(product.productId, {
-      quantity: product.requiredQuantity,
-    });
-    return update;
-  } catch (err) {
-    throw err;
-  }
-};
+
+
 
 export const getProductDall = async () => {
   try {
@@ -33,7 +24,28 @@ export const getProductDall = async () => {
   }
 };
 
-export const deleteDall = async (id:string) => {
+
+export const getByQuery = async (searchTerm:string) => {
+  try {
+    const regex = new RegExp(searchTerm, 'i');
+    const result = await ProductModel.find({
+      $or: [
+        { name: regex }, 
+        { description: regex },
+        { category: regex }  
+      ]
+    });
+    if(!result || result.length === 0) {
+      throw new Error("not found results")
+    }
+    return result;
+  } catch (error) {
+    throw error; 
+  }
+}
+
+
+export const deleteDall = async (id: string) => {
   try {
     const product = await ProductModel.findByIdAndDelete(id)
     return product
@@ -42,7 +54,7 @@ export const deleteDall = async (id:string) => {
   }
 };
 
-export const newProductsDall = async (product:Product) => {
+export const newProductsDall = async (product: Product) => {
   const newUser = new ProductModel(product)
   try {
     const newProduct = await newUser.save()
