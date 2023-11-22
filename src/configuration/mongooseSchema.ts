@@ -5,7 +5,6 @@ const CategorySchema = new Schema({
   img: { type: String, require: true },
 });
 
-
 const UserSchema = new Schema({
   user_name: { type: String, required: true },
   password: { type: String, required: true },
@@ -20,7 +19,9 @@ const ProductSchema = new Schema({
   category: { type: String, required: true },
   discountPercentage: { type: Number, required: true },
   image: {
-    url: { type: String, required: true },
+    large: { type: String, required: true },
+    medium: { type: String, required: true },
+    small: { type: String, required: true },
     alt: { type: String, required: true },
   },
 });

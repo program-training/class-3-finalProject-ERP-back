@@ -1,5 +1,5 @@
 import { productUpdate } from "../configuration/TypeUser";
-import { ProductModel } from "../configuration/userSchema";
+import { ProductModel } from "../configuration/mongooseSchema";
 
 export const updateDall = async (product: productUpdate) => {
     const data = product;
