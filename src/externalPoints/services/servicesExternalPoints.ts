@@ -1,9 +1,19 @@
-import { getByQuery, getProductFromDB } from "../../products/dall/productsDall";
+import { getByQuery, getProductFromDB, categories } from "../../products/dall/productsDall";
 import { updateDall } from "../dall";
-import { Product, productToUpdate } from "../../configuration/TypeUser";
+import {  productToUpdate } from "../../configuration/TypeUser";
 export const getProductByQuery = async (search:string) => {
     try {
       const product = await getByQuery(search);
+      return product;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
+
+  export const categoriesFromDB = async () => {
+    try {
+      const product = await categories();
       return product;
     } catch (error) {
       return Promise.reject(error);
