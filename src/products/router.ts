@@ -1,12 +1,26 @@
 import express from "express";
-
-
+import {
+  allProductsController,
+  deleteController,
+  getProductByIdController,
+  NewProductsController,
+  editProductController,
+  getCategoryByIdController,
+} from "./controllers/productsControllers";
 const productsRouter = express.Router();
 
-productsRouter.get("/inventory", );
-productsRouter.get("/inventory/:id", );
-productsRouter.get("/all/:id", );
-productsRouter.get("/product/:id", );
-productsRouter.get("/top5/:type", );
+productsRouter.get("/", allProductsController);
+productsRouter.get("/:id", getProductByIdController);
+productsRouter.post("/", NewProductsController);
+productsRouter.put("/:id", editProductController);
+productsRouter.delete("/:id", deleteController);
+
+
+
+
+ /// categories 
+
+productsRouter.get("/category/:id", getCategoryByIdController);
+
 
 export default productsRouter;
