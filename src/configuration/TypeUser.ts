@@ -15,7 +15,10 @@ export type Product = {
   category: String;
   discountPercentage: number;
   image: {
-    url: String;
+    large:  String;
+    medium: String;
+    small: String;
     alt: String;
   };
 };
+

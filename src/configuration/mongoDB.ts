@@ -8,11 +8,12 @@ const dbUserName = process.env.DB_USER_NAME;
 const dbName = "ERP-final-project";
 
 
-const uri = `mongodb+srv://${dbUserName}:${dbPassword}@cluster0.llwz20q.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+const uri =  process.env.MONGO_CONNECTION_URI;
 
 
 export const connectToDatabase = async () => {
   try {
+    if (!uri) throw new Error('uri not in found')
     await mongoose.connect(uri);
     console.log("Connected to MongoDB");
   } catch (error) {
