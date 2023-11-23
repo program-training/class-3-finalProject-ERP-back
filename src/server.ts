@@ -16,7 +16,7 @@ app.use(router)
 
 app.listen(8080, async () => {
   await connectToDatabase()
-  console.log(`Server is up and running on port ${port}`);
+  // console.log(`Server is up and running on port ${port}`);
 });
 
 
