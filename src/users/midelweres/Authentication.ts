@@ -8,12 +8,12 @@ export const Authentication = async (req: Request, res: Response, next: NextFunc
     console.log(token);
 
     if (!token) {
-        res.status(500).send("token is required")
+        res.status(400).send("token is required")
         return
     }
     jwt.verify(token, secretKey, (err, decoded) => {
         if (err) {
-            res.status(500).send('Failed to verify token:' + err);
+            res.status(400).send('Failed to verify token:' + err);
         } else {
             console.log('Token verified successfully:', decoded);
             if (typeof (decoded) === "object") {

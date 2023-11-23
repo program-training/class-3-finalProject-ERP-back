@@ -31,6 +31,8 @@ export const updateInventoryController = async (
   res: Response
 ) => {
   const product = req.body as productToUpdate;
+  console.log(product);
+  
   try {
     const data = await updateInventoryServices(product);
     res.status(200).json(data);
