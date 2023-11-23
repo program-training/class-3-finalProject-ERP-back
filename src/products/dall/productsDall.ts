@@ -65,7 +65,7 @@ export const deleteDall = async (id: string) => {
   }
 };
 
-export const newProductsDall = async (product: Product) => {
+export const newProductsDall = async (product: Product) => {  
   const newUser = new ProductModel(product)
   try {
     const newProduct = await newUser.save()
@@ -78,7 +78,7 @@ export const newProductsDall = async (product: Product) => {
 
 export const editProductDall = async (product:Product, id: string) => {
   try {
-    const newProduct = await ProductModel.findByIdAndUpdate(id, product , { new: true })
+    const newProduct = await ProductModel.findByIdAndUpdate(id, product)
     return newProduct
   } catch (err) {
     throw err

@@ -22,7 +22,9 @@ const ProductSchema = new Schema({
   category: { type: String, required: true },
   discountPercentage: { type: Number, required: true },
   image: {
-    url: { type: String, required: true },
+    large: { type: String, required: true },
+    medium: { type: String, required: true },
+    small: { type: String, required: true },
     alt: { type: String, required: true },
   },
 });

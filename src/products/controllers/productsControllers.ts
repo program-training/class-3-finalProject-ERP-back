@@ -32,7 +32,7 @@ export const allProductsController = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteController = async (req: Request, res: Response) => {
+export const deleteProductController = async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
     const deleteOne = await deleteServices(id);
@@ -42,7 +42,7 @@ export const deleteController = async (req: Request, res: Response) => {
   }
 };
 
-export const NewProductsController = async (req: Request, res: Response) => {
+export const newProductsController = async (req: Request, res: Response) => {
   try {
     const newProduct = await newProductsServices(req.body);
     res.status(200).json(newProduct);

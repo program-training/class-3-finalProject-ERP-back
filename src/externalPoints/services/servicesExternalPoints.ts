@@ -23,16 +23,16 @@ export const getProductByQuery = async (search:string) => {
 
   export const updateInventoryServices = async (product:productToUpdate) => {
     try {
-      if (!product._id){
+      if (!product.productId){
         return
       }
-      const dataProduct = await getProductFromDB(product._id);
+      const dataProduct = await getProductFromDB(product.productId);
       if (!dataProduct) throw new Error("no such product in the database");
-      const requiredQuantity = dataProduct.quantity - product.quantity;
-      if (requiredQuantity < 0) throw new Error("not enough in stock");
+      const quantity = dataProduct.quantity - product.requiredQuantity;
+      if (quantity < 0) throw new Error("not enough in stock");
       const productUpdate = {
-        productId: product._id,
-        requiredQuantity: requiredQuantity,
+        productId: product.productId,
+        requiredQuantity: quantity,
       };
       const update = await updateDall(productUpdate);
       return update;
