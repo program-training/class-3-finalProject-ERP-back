@@ -59,9 +59,7 @@ export const newProductsDall = async (product: Product) => {
 
 export const editProductDall = async (product: Product, id: string) => {
   try {
-    const newProduct = await ProductModel.findByIdAndUpdate(id, product, {
-      new: true,
-    });
+    const newProduct = await ProductModel.findByIdAndUpdate(id, product);
     return newProduct;
   } catch (err) {
     throw err;

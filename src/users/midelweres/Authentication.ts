@@ -5,7 +5,7 @@ import { secretKey } from '../../configuration/jwt';
 
 export const Authentication = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers['authorization']
-    console.log(token);
+    // console.log(token);
 
     if (!token) {
         res.status(500).send("token is required")
@@ -15,9 +15,9 @@ export const Authentication = async (req: Request, res: Response, next: NextFunc
         if (err) {
             res.status(500).send('Failed to verify token:' + err);
         } else {
-            console.log('Token verified successfully:', decoded);
+            // console.log('Token verified successfully:', decoded);
             if (typeof (decoded) === "object") {
-                req.body.user = { user_name: decoded.user.user_name, password: decoded.user.password } as userData
+                // req.body.user = { user_name: decoded.user.user_name, password: decoded.user.password } as userData
                 next();
             }
             else {
