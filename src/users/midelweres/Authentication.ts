@@ -17,7 +17,7 @@ export const Authentication = async (req: Request, res: Response, next: NextFunc
         } else {
             console.log('Token verified successfully:', decoded);
             if (typeof (decoded) === "object") {
-                req.body.user = { user_name: decoded.user.user_name, password: decoded.user.password } as userData
+                // req.body.user = { user_name: decoded.user.user_name, password: decoded.user.password } as userData
                 next();
             }
             else {
