@@ -5,7 +5,11 @@ import { Product } from "../../configuration/TypeUser";
 
 export const getProductFromDB = async (productID: string) => {
   try {
-    const product = await ProductModel.findById(productID);
+    console.log(productID);
+    
+    const product = await ProductModel.findById("655f1cbddab13343a8db795c");
+    console.log(product);
+    
     return product;
   } catch (err) {
     throw err;
