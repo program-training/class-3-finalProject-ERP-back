@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getProduct, getProductById } from "../../products/service/productsService";
 import { getProductByQuery, updateInventoryServices } from "../services/servicesExternalPoints";
-import { productUpdate } from "../../configuration/TypeUser";
+import { productToUpdate } from "../../configuration/TypeUser";
 
 
 
@@ -30,7 +30,7 @@ export const updateInventoryController = async (
   req: Request,
   res: Response
 ) => {
-  const product = req.body as productUpdate;
+  const product = req.body as productToUpdate;
   try {
     const data = await updateInventoryServices(product);
     res.status(200).json(data);

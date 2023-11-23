@@ -7,6 +7,10 @@ export type productUpdate = {
   productId: string;
   requiredQuantity: number;
 };
+export type productToUpdate = {
+  _id: string;
+  quantity: number;
+};
 export type Product = {
   _id?:string
   name: string;
