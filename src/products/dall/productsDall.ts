@@ -1,16 +1,23 @@
-import { CategoryModel, ProductModel } from "../../configuration/userSchema";
+import { CategoriesModel, ProductModel } from "../../configuration/userSchema";
 import { productUpdate } from "../../configuration/TypeUser";
 import { Product } from "../../configuration/TypeUser";
 
 
 export const getProductFromDB = async (productID: string) => {
   try {
-    console.log(productID);
-    
-    const product = await ProductModel.findById("655f1cbddab13343a8db795c");
-    console.log(product);
-    
+    const product = await ProductModel.findById(productID);
     return product;
+  } catch (err) {
+    throw err;
+  }
+};
+
+
+
+export const categories = async () => {
+  try {
+    const categoriesDate = await CategoriesModel.find({});
+    return categoriesDate;
   } catch (err) {
     throw err;
   }
@@ -82,7 +89,7 @@ export const editProductDall = async (product:Product, id: string) => {
 
 export const getCategoryDall = async (categoryID: string) => {
   try {
-    const category = await CategoryModel.findById(categoryID)
+    const category = await CategoriesModel.findById(categoryID)
     return category
   } catch (err) {
     throw err

@@ -1,6 +1,6 @@
-import { getByQuery, getProductFromDB } from "../../products/dall/productsDall";
+import { getByQuery, getProductFromDB, categories } from "../../products/dall/productsDall";
 import { updateDall } from "../dall";
-import { Product } from "../../configuration/TypeUser";
+import {  productToUpdate } from "../../configuration/TypeUser";
 export const getProductByQuery = async (search:string) => {
     try {
       const product = await getByQuery(search);
@@ -11,8 +11,21 @@ export const getProductByQuery = async (search:string) => {
   };
 
 
-  export const updateInventoryServices = async (product:Product) => {
+  export const categoriesFromDB = async () => {
     try {
+      const product = await categories();
+      return product;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
+
+  export const updateInventoryServices = async (product:productToUpdate) => {
+    try {
+      if (!product._id){
+        return
+      }
       const dataProduct = await getProductFromDB(product._id);
       if (!dataProduct) throw new Error("no such product in the database");
       const requiredQuantity = dataProduct.quantity - product.quantity;
