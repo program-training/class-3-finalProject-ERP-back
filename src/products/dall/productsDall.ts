@@ -89,7 +89,7 @@ export const editProductDall = async (product:Product, id: string) => {
 
 export const getCategoryDall = async (categoryID: string) => {
   try {
-    const category = await CategoryModel.findById(categoryID)
+    const category = await CategoriesModel.findById(categoryID)
     return category
   } catch (err) {
     throw err
