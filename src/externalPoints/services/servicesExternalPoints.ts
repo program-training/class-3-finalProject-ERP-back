@@ -1,7 +1,6 @@
-import { productUpdate } from "../../configuration/TypeUser";
 import { getByQuery, getProductFromDB } from "../../products/dall/productsDall";
 import { updateDall } from "../dall";
-
+import { Product } from "../../configuration/TypeUser";
 export const getProductByQuery = async (search:string) => {
     try {
       const product = await getByQuery(search);
@@ -12,7 +11,7 @@ export const getProductByQuery = async (search:string) => {
   };
 
 
-  export const updateInventoryServices = async (product) => {
+  export const updateInventoryServices = async (product:Product) => {
     try {
       const dataProduct = await getProductFromDB(product._id);
       if (!dataProduct) throw new Error("no such product in the database");
