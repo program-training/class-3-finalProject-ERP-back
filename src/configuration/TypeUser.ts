@@ -8,8 +8,8 @@ export type productUpdate = {
   requiredQuantity: number;
 };
 export type productToUpdate = {
-  _id: string;
-  quantity: number;
+  productId: string;
+  requiredQuantity: number;
 };
 export type Product = {
   _id?:string
