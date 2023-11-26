@@ -1,4 +1,7 @@
-import { CategoryModel, ProductModel } from "../../configuration/userSchema";
+import {
+  CategoriesModel,
+  ProductModel,
+} from "../../configuration/mongooseSchema";
 import { productUpdate } from "../../configuration/TypeUser";
 import { Product } from "../../configuration/TypeUser";
 
@@ -10,9 +13,6 @@ export const getProductFromDB = async (productID: string) => {
     throw err;
   }
 };
-
-
-
 
 export const getProductDall = async () => {
   try {
@@ -48,7 +48,7 @@ export const deleteDall = async (id: string) => {
 };
 
 export const newProductsDall = async (product: Product) => {
-  const newUser = new ProductModel(product)
+  const newUser = new ProductModel(product);
   try {
     const newProduct = await newUser.save();
     return newProduct;
@@ -59,8 +59,10 @@ export const newProductsDall = async (product: Product) => {
 
 export const editProductDall = async (product: Product, id: string) => {
   try {
-    const newProduct = await ProductModel.findByIdAndUpdate(id, product , { new: true })
-    return newProduct
+    const newProduct = await ProductModel.findByIdAndUpdate(id, product, {
+      new: true,
+    });
+    return newProduct;
   } catch (err) {
     throw err;
   }
@@ -70,8 +72,8 @@ export const editProductDall = async (product: Product, id: string) => {
 
 export const getCategoryDall = async (categoryID: string) => {
   try {
-    const category = await CategoryModel.findById(categoryID)
-    return category
+    const category = await CategoriesModel.findById(categoryID);
+    return category;
   } catch (err) {
     throw err;
   }
