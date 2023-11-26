@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getProduct, getProductById } from "../../products/service/productsService";
-import { getProductByQuery, updateInventoryServices, categoriesFromDB } from "../services/servicesExternalPoints";
+import { getProductByQuery, updateInventoryServices, categoriesFromDB, getCategoryById } from "../services/servicesExternalPoints";
 import { productToUpdate } from "../../configuration/TypeUser";
 
 
@@ -51,6 +51,16 @@ console.log("dsfsdf");
 
     const data = await categoriesFromDB();
     res.status(200).send(data)
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const getCategoryByIdController = async (req: Request, res: Response) => {
+  const categoryID = req.params.id;
+  try {
+    const category = await getCategoryById(categoryID);
+    res.status(200).json(category);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
