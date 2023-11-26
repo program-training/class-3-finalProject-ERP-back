@@ -1,7 +1,6 @@
-import { CategoriesModel, ProductModel } from "../../configuration/userSchema";
+import { CategoryModel, ProductModel } from "../../configuration/userSchema";
 import { productUpdate } from "../../configuration/TypeUser";
 import { Product } from "../../configuration/TypeUser";
-
 
 export const getProductFromDB = async (productID: string) => {
   try {
@@ -14,74 +13,56 @@ export const getProductFromDB = async (productID: string) => {
 
 
 
-export const categories = async () => {
+
+export const getProductDall = async () => {
   try {
-    const categoriesDate = await CategoriesModel.find({});
-    return categoriesDate;
+    const product = await ProductModel.find({});
+    return product;
   } catch (err) {
     throw err;
   }
 };
 
-
-
-
-export const getProductDall = async () => {
+export const getByQuery = async (searchTerm: string) => {
   try {
-    const product = await ProductModel.find({})
-    return product
-  } catch (err) {
-    throw err
-  }
-};
-
-
-export const getByQuery = async (searchTerm:string) => {
-  try {
-    const regex = new RegExp(searchTerm, 'i');
+    const regex = new RegExp(searchTerm, "i");
     const result = await ProductModel.find({
-      $or: [
-        { name: regex }, 
-        { description: regex },
-        { category: regex }  
-      ]
+      $or: [{ name: regex }, { description: regex }, { category: regex }],
     });
-    if(!result || result.length === 0) {
-      throw new Error("not found results")
+    if (!result || result.length === 0) {
+      throw new Error("not found results");
     }
     return result;
   } catch (error) {
-    throw error; 
+    throw error;
   }
-}
-
+};
 
 export const deleteDall = async (id: string) => {
   try {
-    const product = await ProductModel.findByIdAndDelete(id)
-    return product
+    const product = await ProductModel.findByIdAndDelete(id);
+    return product;
   } catch (err) {
-    throw err
+    throw err;
   }
 };
 
-export const newProductsDall = async (product: Product) => {  
+export const newProductsDall = async (product: Product) => {
   const newUser = new ProductModel(product)
   try {
-    const newProduct = await newUser.save()
-    return newProduct
+    const newProduct = await newUser.save();
+    return newProduct;
   } catch (err) {
-    throw err
+    throw err;
   }
 };
 
-
-export const editProductDall = async (product:Product, id: string) => {
+export const editProductDall = async (product: Product, id: string) => {
   try {
-    const newProduct = await ProductModel.findByIdAndUpdate(id, product)
+    const newProduct = await ProductModel.findByIdAndUpdate(id, product , { new: true })
     return newProduct
   } catch (err) {
-    throw err
+    throw err;
   }
 };
 
@@ -89,9 +70,9 @@ export const editProductDall = async (product:Product, id: string) => {
 
 export const getCategoryDall = async (categoryID: string) => {
   try {
-    const category = await CategoriesModel.findById(categoryID)
+    const category = await CategoryModel.findById(categoryID)
     return category
   } catch (err) {
-    throw err
+    throw err;
   }
 };

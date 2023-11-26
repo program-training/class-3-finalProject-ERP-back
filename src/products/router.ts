@@ -7,6 +7,7 @@ import {
   editProductController,
   getCategoryByIdController,
 } from "./controllers/productsControllers";
+import { validateProductUpdate } from "../users/midelweres/updateValidation";
 const productsRouter = express.Router();
 
 productsRouter.get("/", allProductsController);

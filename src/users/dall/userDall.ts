@@ -1,4 +1,4 @@
-import { UserModel } from "../../configuration/userSchema";
+import { UserModel } from "../../configuration/mongooseSchema";
 import { userData } from "../../configuration/TypeUser";
 import { productUpdate } from "../../configuration/TypeUser";
 
