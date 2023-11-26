@@ -90,5 +90,12 @@ describe("Test the Products Router", () => {
     // Add more assertions as needed
   });
 
- 
+  test("GET /products returns all products with authentication", async () => {
+    const response = await request(app)
+      .get("/category/655ce51886784f07819c2d95")
+      .set("Authorization", token)
+      .timeout(10000)
+      .expect(200);
+    expect(response.body.name).toEqual('fashionwomen')
+  });
 });

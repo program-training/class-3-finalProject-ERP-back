@@ -1,7 +1,6 @@
 import mongoose, { Schema, InferSchemaType, Document, Model } from "mongoose";
 
 
-
 const UserSchema = new Schema({
   user_name: { type: String, required: true },
   password: { type: String, required: true },
