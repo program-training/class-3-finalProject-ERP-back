@@ -14,7 +14,7 @@ export const signUp = async (req: Request, res: Response) => {
         const token = await getToken(result)
         return res.status(200).send(token);
     } catch (err: any) {
-        return res.status(500).send(err.message);
+        return res.status(400).send(err.message);
     }
 }
 export const logIn = async (req: Request, res: Response) => {
@@ -24,6 +24,6 @@ export const logIn = async (req: Request, res: Response) => {
         res.status(200).send(token)
     }
     catch (err: any) {
-        res.status(500).send(err.message)
+        res.status(400).send(err.message)
     }
 }

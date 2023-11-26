@@ -1,14 +1,33 @@
 import { productUpdate } from "../configuration/TypeUser";
-import { ProductModel } from "../configuration/userSchema";
+import { CategoriesModel, ProductModel } from "../configuration/mongooseSchema";
 
-export const updateDall = async (product: productUpdate) => {
-    const data = product;
+export const updateDall = async (productUpdate: productUpdate) => {
     try {
-      const update = await ProductModel.findByIdAndUpdate(product.productId, {
-        quantity: product.requiredQuantity,
+      const update = await ProductModel.findByIdAndUpdate(productUpdate.productId, {
+        quantity: productUpdate.requiredQuantity,
       });
       return update;
     } catch (err) {
       throw err;
     }
   };
+
+  export const getCategoryDall = async (categoryID: string) => {
+    try {
+      const category = await CategoriesModel.findById(categoryID)
+      return category
+    } catch (err) {
+      throw err
+    }
+  };
+
+  export const categoriesFromDall = async () => {
+    try {
+      const category = await CategoriesModel.find({});
+      return category
+    } catch (err) {
+      throw err
+    }
+  };
+
+    

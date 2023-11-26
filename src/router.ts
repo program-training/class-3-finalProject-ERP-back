@@ -5,9 +5,8 @@ import externalPointsRouter from "./externalPoints/router/routerExternalPoints";
 import { Authentication } from "./users/midelweres/Authentication";
 const router = express.Router();
 
-
 router.use('/api/inventory',Authentication, productsRouter)
-router.use('/users',usersRouter)
+router.use('/api/users',usersRouter)
 router.use('/api/shop_inventory',externalPointsRouter)
 
 

@@ -1,15 +1,16 @@
 import mongoose, { Schema, InferSchemaType, Document, Model } from "mongoose";
 
-const CategorySchema = new Schema({
-  name: { type: String, require: true },
-  img: { type: String, require: true },
-});
-
 
 const UserSchema = new Schema({
   user_name: { type: String, required: true },
   password: { type: String, required: true },
   //   avatar: String,
+});
+
+
+const CategoriesSchema = new Schema({
+  name: { type: String, required: true },
+  img: { type: String, required: true },
 });
 
 const ProductSchema = new Schema({
@@ -20,19 +21,23 @@ const ProductSchema = new Schema({
   category: { type: String, required: true },
   discountPercentage: { type: Number, required: true },
   image: {
-    url: { type: String, required: true },
+    large: { type: String, required: true },
+    medium: { type: String, required: true },
+    small: { type: String, required: true },
     alt: { type: String, required: true },
   },
 });
 
-type CategorySchema = InferSchemaType<typeof CategorySchema>;
 type User = InferSchemaType<typeof UserSchema>;
 type Product = InferSchemaType<typeof ProductSchema>;
+type Categories = InferSchemaType<typeof CategoriesSchema>;
 
-export const CategoryModel: Model<CategorySchema> =
-  mongoose.model<CategorySchema>("category", CategorySchema);
 export const UserModel: Model<User> = mongoose.model<User>("user", UserSchema);
 export const ProductModel: Model<Product> = mongoose.model<Product>(
   "Product",
   ProductSchema
+);
+export const CategoriesModel: Model<Categories> = mongoose.model<Categories>(
+  "Categories",
+  CategoriesSchema
 );
