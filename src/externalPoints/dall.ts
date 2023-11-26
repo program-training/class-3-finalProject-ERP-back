@@ -1,5 +1,5 @@
 import { productUpdate } from "../configuration/TypeUser";
-import { CategoriesModel, ProductModel } from "../configuration/userSchema";
+import { CategoriesModel, ProductModel } from "../configuration/mongooseSchema";
 
 export const updateDall = async (productUpdate: productUpdate) => {
     try {
@@ -20,3 +20,14 @@ export const updateDall = async (productUpdate: productUpdate) => {
       throw err
     }
   };
+
+  export const categoriesFromDall = async () => {
+    try {
+      const category = await CategoriesModel.find({});
+      return category
+    } catch (err) {
+      throw err
+    }
+  };
+
+    
