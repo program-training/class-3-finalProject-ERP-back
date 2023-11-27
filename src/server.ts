@@ -14,9 +14,10 @@ app.use(cors)
 app.use(express.json());
 app.use(router)
 
-app.listen(8080, async () => {
+
+app.listen(port, async () => {
   await connectToDatabase()
-  // console.log(`Server is up and running on port ${port}`);
+  console.log(`Server is up and running on port ${port}`);
 });
 
 
