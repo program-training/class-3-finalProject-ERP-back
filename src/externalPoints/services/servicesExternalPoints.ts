@@ -21,6 +21,7 @@ export const updateInventoryServices2 = async (products: productToUpdate[]) => {
         });
       }
     }
+
     if (toUpdates.length === 0) {
       for (const product of products) {
         const dataProduct = await getProductFromDB(product.productId);
@@ -31,8 +32,10 @@ export const updateInventoryServices2 = async (products: productToUpdate[]) => {
           if (update) updates.push(product);
         }
       }
+      return updates
     }
-    return updates
+    return toUpdates
+    
   } catch (error) {
     return Promise.reject(error);
   }
