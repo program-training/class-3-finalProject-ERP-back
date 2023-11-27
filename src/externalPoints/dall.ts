@@ -2,6 +2,9 @@ import { productUpdate } from "../configuration/TypeUser";
 import { CategoriesModel, ProductModel } from "../configuration/mongooseSchema";
 
 export const updateDall = async (productUpdate: productUpdate) => {
+    
+    console.log(productUpdate);
+    
     try {
       const update = await ProductModel.findByIdAndUpdate(productUpdate.productId, {
         quantity: productUpdate.requiredQuantity,

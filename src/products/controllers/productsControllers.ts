@@ -19,7 +19,7 @@ export const getProductByIdController = async (req: Request, res: Response) => {
     const product = await getProductById(id);
     res.status(200).json(product);
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 566);
+    if (error instanceof Error) return handleError(res, error, 500);
 
   }
 };
@@ -29,8 +29,8 @@ export const allProductsController = async (req: Request, res: Response) => {
   try {
     const allProducts = await getProduct();
     res.status(200).json(allProducts);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 500);
   }
 };
 
@@ -38,18 +38,18 @@ export const deleteProductController = async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
     const deleteOne = await deleteServices(id);
-    res.status(200).json(deleteOne);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(204).json(deleteOne);
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 500);
   }
 };
 
 export const newProductsController = async (req: Request, res: Response) => {
   try {
     const newProduct = await newProductsServices(req.body);
-    res.status(200).json(newProduct);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(201).json(newProduct);
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 500);
   }
 };
 
@@ -60,8 +60,8 @@ export const editProductController = async (req: Request, res: Response) => {
   try {
     const newProduct = await editProductService(product,id)
     res.status(200).json(newProduct);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 500);
   }
 };
 
@@ -72,7 +72,7 @@ export const getCategoryByIdController = async (req: Request, res: Response) => 
   try {
     const category = await getCategoryById(categoryID);
     res.status(200).json(category);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 500);
   }
 };

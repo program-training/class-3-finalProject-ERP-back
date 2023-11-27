@@ -12,13 +12,13 @@ export const updateInventoryServices = async (products: productToUpdate[]) => {
         toUpdates.push({
           error: `No such product in the database: ${product.productId}`,
         });
-        continue;
-      }
-      const quantity = dataProduct.quantity - product.requiredQuantity;
-      if (quantity < 0) {
-        toUpdates.push({
-          error: `Not enough in stock for product ${product.productId} in stock: ${dataProduct.quantity}`,
-        });
+      } else {
+        const quantity = dataProduct.quantity - product.requiredQuantity;
+        if (quantity < 0) {
+          toUpdates.push({
+            error: `Not enough in stock for product ${product.productId}! in stock: ${dataProduct.quantity}`,
+          });
+        }
       }
     }
 
@@ -26,16 +26,15 @@ export const updateInventoryServices = async (products: productToUpdate[]) => {
       for (const product of products) {
         const dataProduct = await getProductFromDB(product.productId);
         if (dataProduct) {
-          product.requiredQuantity =
-            dataProduct.quantity - product.requiredQuantity;
+          const newQuantity = dataProduct.quantity - product.requiredQuantity;
+          product.requiredQuantity = newQuantity;
           const update = await updateDall(product);
           if (update) updates.push(product);
         }
       }
-      return updates
+      return updates;
     }
-    return toUpdates
-    
+    return toUpdates;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -58,7 +57,6 @@ export const categoriesFromDB = async () => {
     return Promise.reject(error);
   }
 };
-
 
 export const getCategoryById = async (categoryID: string) => {
   try {
