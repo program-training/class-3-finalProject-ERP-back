@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { getProduct, getProductById } from "../../products/service/productsService";
 import { getProductByQuery, updateInventoryServices, categoriesFromDB, getCategoryById } from "../services/servicesExternalPoints";
 import { productToUpdate } from "../../configuration/TypeUser";
-
+import { handleError } from "../../utils/handleErrors";
 
 
 export const getAllProducts = async (req: Request, res: Response) => {
@@ -16,12 +16,11 @@ export const getAllProducts = async (req: Request, res: Response) => {
       const result = await getProductByQuery(search)
       res.status(200).send(result)
     }
-  } catch (error: any) {
-    res.status(400).send({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error);
+
   }
 };
-
-
 
 
 
@@ -31,8 +30,6 @@ export const updateInventoryController = async (
   res: Response
 ) => {
   const product = req.body as productToUpdate;
-  console.log(product);
-  
   try {
     const data = await updateInventoryServices(product);
     res.status(200).json(data);
@@ -47,8 +44,6 @@ export const getCategories = async (
   res: Response
 ) => {
   try {
-console.log("dsfsdf");
-
     const data = await categoriesFromDB();
     res.status(200).send(data)
   } catch (error: any) {

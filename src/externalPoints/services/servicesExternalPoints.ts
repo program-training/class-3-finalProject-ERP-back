@@ -1,6 +1,43 @@
 import { getByQuery, getProductFromDB } from "../../products/dall/productsDall";
 import { updateDall, getCategoryDall, categoriesFromDall } from "../dall";
-import { productToUpdate } from "../../configuration/TypeUser";
+import { ordersErrors, productToUpdate } from "../../configuration/TypeUser";
+
+export const updateInventoryServices2 = async (products: productToUpdate[]) => {
+  try {
+    const updates: productToUpdate[] = [];
+    const toUpdates: ordersErrors[] = [];
+    for (const product of products) {
+      const dataProduct = await getProductFromDB(product.productId);
+      if (!dataProduct) {
+        toUpdates.push({
+          error: `No such product in the database: ${product.productId}`,
+        });
+        continue;
+      }
+      const quantity = dataProduct.quantity - product.requiredQuantity;
+      if (quantity < 0) {
+        toUpdates.push({
+          error: `Not enough in stock for product ${product.productId} in stock: ${dataProduct.quantity}`,
+        });
+      }
+    }
+    if (toUpdates.length === 0) {
+      for (const product of products) {
+        const dataProduct = await getProductFromDB(product.productId);
+        if (dataProduct) {
+          product.requiredQuantity =
+            dataProduct.quantity - product.requiredQuantity;
+          const update = await updateDall(product);
+          if (update) updates.push(product);
+        }
+      }
+    }
+    return updates
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export const getProductByQuery = async (search: string) => {
   try {
     const product = await getByQuery(search);

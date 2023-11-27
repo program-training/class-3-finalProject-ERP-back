@@ -3,6 +3,10 @@ export type userData = {
   password: string;
 };
 
+export type ordersErrors = {
+  error: string;
+};
+
 export type productUpdate = {
   productId: string;
   requiredQuantity: number;
