@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getProduct, getProductById } from "../../products/service/productsService";
-import { getProductByQuery, updateInventoryServices2, categoriesFromDB, getCategoryById } from "../services/servicesExternalPoints";
+import { getProductByQuery, updateInventoryServices, categoriesFromDB, getCategoryById } from "../services/servicesExternalPoints";
 import { productToUpdate } from "../../configuration/TypeUser";
 import { handleError } from "../../utils/handleErrors";
 
@@ -31,7 +31,7 @@ export const updateInventoryController = async (
 ) => {
   const product = req.body as productToUpdate[];
   try {
-    const data = await updateInventoryServices2(product);
+    const data = await updateInventoryServices(product);
     res.status(200).json(data);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
