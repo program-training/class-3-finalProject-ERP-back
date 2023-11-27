@@ -8,6 +8,7 @@ import {
 import { Product, productUpdate } from "../../configuration/TypeUser";
 import { getProduct } from "../service/productsService";
 import { newProductsServices } from "../service/productsService";
+import { handleError } from "../../utils/handleErrors";
 
 
 
@@ -17,8 +18,9 @@ export const getProductByIdController = async (req: Request, res: Response) => {
   try {
     const product = await getProductById(id);
     res.status(200).json(product);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 566);
+
   }
 };
 
