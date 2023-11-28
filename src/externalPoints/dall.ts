@@ -1,17 +1,18 @@
+import mongoose ,{ Schema, model } from "mongoose";
 import { productUpdate } from "../configuration/TypeUser";
 import { CategoriesModel, ProductModel } from "../configuration/mongooseSchema";
 
+ 
+
 export const updateDall = async (productUpdate: productUpdate) => {
-    
-    console.log(productUpdate);
-    
+        
     try {
       const update = await ProductModel.findByIdAndUpdate(productUpdate.productId, {
         quantity: productUpdate.requiredQuantity,
       });
       return update;
     } catch (err) {
-      throw err;
+      return err;
     }
   };
 
@@ -20,7 +21,7 @@ export const updateDall = async (productUpdate: productUpdate) => {
       const category = await CategoriesModel.findById(categoryID)
       return category
     } catch (err) {
-      throw err
+      return err
     }
   };
 
@@ -29,7 +30,7 @@ export const updateDall = async (productUpdate: productUpdate) => {
       const category = await CategoriesModel.find({});
       return category
     } catch (err) {
-      throw err
+      return err
     }
   };
 

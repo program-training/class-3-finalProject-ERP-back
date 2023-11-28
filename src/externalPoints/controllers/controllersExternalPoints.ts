@@ -18,7 +18,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
     }
   } catch (error) {
     if (error instanceof Error) return handleError(res, error);
-
   }
 };
 
@@ -33,8 +32,8 @@ export const updateInventoryController = async (
   try {
     const data = await updateInventoryServices(product);
     res.status(200).json(data);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 400);
   }
 };
 
@@ -46,8 +45,8 @@ export const getCategories = async (
   try {
     const data = await categoriesFromDB();
     res.status(200).send(data)
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 400);
   }
 };
 
@@ -56,7 +55,7 @@ export const getCategoryByIdController = async (req: Request, res: Response) => 
   try {
     const category = await getCategoryById(categoryID);
     res.status(200).json(category);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 400);
   }
 };

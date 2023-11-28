@@ -20,14 +20,14 @@ export type Product = {
   name: string;
   salePrice: number;
   quantity: number;
-  description: String;
-  category: String;
+  description: string;
+  category: string;
   discountPercentage: number;
   image: {
-    large:  String;
-    medium: String;
-    small: String;
-    alt: String;
+    large:  string;
+    medium: string;
+    small: string;
+    alt: string;
   };
 };
 
