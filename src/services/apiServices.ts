@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getUserByEmail } from "../users/dall/userDall";
-import { userData } from "../configuration/TypeUser";
-import { productUpdate } from "../configuration/TypeUser";
+import { userData } from "../configuration/Type";
+import { productUpdate } from "../configuration/Type";
 import { secretKey } from "../configuration/jwt";
 
 export const getToken = async (user: userData) => {

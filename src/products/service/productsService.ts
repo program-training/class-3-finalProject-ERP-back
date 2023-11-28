@@ -4,9 +4,9 @@ import {
   editProductDall,
   tenProductsDall,
 } from "../dall/productsDall";
-import { productUpdate } from "../../configuration/TypeUser";
+import { productUpdate } from "../../configuration/Type";
 import { deleteDall, newProductsDall } from "../dall/productsDall";
-import { Product } from "../../configuration/TypeUser";
+import { Product } from "../../configuration/Type";
 
 export const getProductById = async (id: string) => {
   try {
@@ -33,7 +33,7 @@ export const tenProductsService = async (page: number) => {
   try {
     const product = (await tenProductsDall(namPage)) as Product[];
     if (product?.length === 0) {
-      throw new Error("no mor  product in the database");
+      throw new Error("no mor product in the database");
     }
     return product;
   } catch (error) {

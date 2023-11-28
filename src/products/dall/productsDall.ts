@@ -2,8 +2,8 @@ import {
   CategoriesModel,
   ProductModel,
 } from "../../configuration/mongooseSchema";
-import { productUpdate } from "../../configuration/TypeUser";
-import { Product } from "../../configuration/TypeUser";
+import { productUpdate } from "../../configuration/Type";
+import { Product } from "../../configuration/Type";
 
 export const getProductFromDB = async (productID: string) => {
   try {
@@ -76,4 +76,3 @@ export const editProductDall = async (product: Product, id: string) => {
     return err;
   }
 };
-

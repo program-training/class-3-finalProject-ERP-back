@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { userData } from "../../configuration/TypeUser";
+import { userData } from "../../configuration/Type";
 import { secretKey } from "../../configuration/jwt";
 
 export const Authentication = async (

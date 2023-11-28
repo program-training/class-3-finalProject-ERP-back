@@ -5,7 +5,7 @@ import {
   getProductById,
   tenProductsService,
 } from "../service/productsService";
-import { Product, productUpdate } from "../../configuration/TypeUser";
+import { Product, productUpdate } from "../../configuration/Type";
 import { getProductsService } from "../service/productsService";
 import { newProductsServices } from "../service/productsService";
 import { handleError } from "../../utils/handleErrors";
