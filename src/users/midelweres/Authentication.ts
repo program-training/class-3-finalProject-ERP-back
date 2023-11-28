@@ -3,6 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 import { userData } from '../../configuration/TypeUser';
 import { secretKey } from '../../configuration/jwt';
 
+const valid = ["/api/users", "/api/shop_inventory"]
+
+
+
 export const Authentication = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers['authorization']
     if (!token) {

@@ -64,6 +64,8 @@ export const getProductsByCategoryController = async (req: Request, res: Respons
   const categoryName = req.params.name;
   try {
     const categoryProducts = await getProductsByCategoryService(categoryName);
+    console.log(req.originalUrl);
+    
     res.status(200).json(categoryProducts);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 400);
