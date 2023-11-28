@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getProduct, getProductById } from "../../products/service/productsService";
+import { getProductsService, getProductById } from "../../products/service/productsService";
 import { getProductByQuery, updateInventoryServices, categoriesFromDB, getCategoryById } from "../services/servicesExternalPoints";
 import { productToUpdate } from "../../configuration/TypeUser";
 import { handleError } from "../../utils/handleErrors";
@@ -9,7 +9,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
   const search = req.query.search as string
   try {
     if (!search) {
-      const allProducts = await getProduct();
+      const allProducts = await getProductsService();
       res.status(200).send(allProducts);
     }
     else {

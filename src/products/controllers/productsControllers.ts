@@ -6,7 +6,7 @@ import {
   getProductById,
 } from "../service/productsService";
 import { Product, productUpdate } from "../../configuration/TypeUser";
-import { getProduct } from "../service/productsService";
+import { getProductsService } from "../service/productsService";
 import { newProductsServices } from "../service/productsService";
 import { handleError } from "../../utils/handleErrors";
 
@@ -27,7 +27,7 @@ export const getProductByIdController = async (req: Request, res: Response) => {
 
 export const allProductsController = async (req: Request, res: Response) => {
   try {
-    const allProducts = await getProduct();
+    const allProducts = await getProductsService();
     res.status(200).json(allProducts);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 500);

@@ -1,4 +1,4 @@
-import { getProductFromDB, getProductDall, editProductDall, getCategoryDall } from "../dall/productsDall";
+import { getProductFromDB, getProductsDall, editProductDall, getCategoryDall } from "../dall/productsDall";
 import { productUpdate } from "../../configuration/TypeUser";
 import { deleteDall, newProductsDall } from "../dall/productsDall";
 import { Product } from "../../configuration/TypeUser";
@@ -15,9 +15,9 @@ export const getProductById = async (id: string) => {
 
 
 
-export const getProduct = async () => {
+export const getProductsService = async () => {
   try {
-    const product = await getProductDall();
+    const product = await getProductsDall();
     if (!product) throw new Error("no  product in the database");
     return product;
   } catch (error) {

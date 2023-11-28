@@ -14,7 +14,7 @@ export const getProductFromDB = async (productID: string) => {
   }
 };
 
-export const getProductDall = async () => {
+export const getProductsDall = async () => {
   try {
     const product = await ProductModel.find({});
     return product;
