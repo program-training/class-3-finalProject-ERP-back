@@ -67,9 +67,9 @@ describe("Test the Products Router", () => {
       .post("/api/inventory/")
       .set("Authorization", token)
       .send(product1)
-      .timeout(10000);
+      .timeout(1000);
     id.id = res.body._id;  
-    expect(res.statusCode).toBe(200); 
+    expect(res.statusCode).toBe(201); 
     expect(res.body.name).toBe(product1.name); 
   });
 
@@ -86,14 +86,14 @@ describe("Test the Products Router", () => {
     const response = await request(app)
     .delete(`/api/inventory/${id.id}`)
     .set("Authorization", token)
-    .expect(200);
+    .expect(204);
   });
 
   test("GET / categories without authentication", async () => {
     const response = await request(app)
       .get("/api/shop_inventory/categories")
       .set("Authorization", token)
-      .timeout(10000)
+      .timeout(1000)
       .expect(200);
     expect(response.body.length).toEqual(14)
   });
