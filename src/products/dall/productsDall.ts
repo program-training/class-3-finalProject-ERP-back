@@ -9,17 +9,26 @@ export const getProductFromDB = async (productID: string) => {
   try {
     const product = await ProductModel.findById(productID);
     return product;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    return error;
   }
 };
 
-export const getProductDall = async () => {
+export const getProductsDall = async () => {
   try {
     const product = await ProductModel.find({});
     return product;
   } catch (err) {
-    throw err;
+    return err;
+  }
+};
+
+export const tenProductsDall = async (page: number) => {
+  try {
+    const product = await ProductModel.find({}).skip(page).limit(10);
+    return product;
+  } catch (err) {
+    return err;
   }
 };
 
@@ -34,7 +43,7 @@ export const getByQuery = async (searchTerm: string) => {
     }
     return result;
   } catch (error) {
-    throw error;
+    return error;
   }
 };
 
@@ -43,7 +52,7 @@ export const deleteDall = async (id: string) => {
     const product = await ProductModel.findByIdAndDelete(id);
     return product;
   } catch (err) {
-    throw err;
+    return err;
   }
 };
 
@@ -53,7 +62,7 @@ export const newProductsDall = async (product: Product) => {
     const newProduct = await newUser.save();
     return newProduct;
   } catch (err) {
-    throw err;
+    return err;
   }
 };
 
@@ -64,7 +73,7 @@ export const editProductDall = async (product: Product, id: string) => {
     });
     return newProduct;
   } catch (err) {
-    throw err;
+    return err;
   }
 };
 
@@ -75,6 +84,6 @@ export const getCategoryDall = async (categoryID: string) => {
     const category = await CategoriesModel.findById(categoryID);
     return category;
   } catch (err) {
-    throw err;
+    return err;
   }
 };

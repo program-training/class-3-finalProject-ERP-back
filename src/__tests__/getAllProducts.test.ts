@@ -55,7 +55,7 @@ describe("Test the Products Router", () => {
 
   test("GET /products/:id returns a product by ID", async () => {
     const res = await request(app)
-      .get("/api/inventory/655f1cbedab13343a8db796e")
+      .get("/api/inventory/655f1cc1dab13343a8db7984")
       .set("Authorization", token)
       .expect(200);
     console.log(res.body.name);
@@ -67,9 +67,9 @@ describe("Test the Products Router", () => {
       .post("/api/inventory/")
       .set("Authorization", token)
       .send(product1)
-      .timeout(10000);
+      .timeout(1000);
     id.id = res.body._id;  
-    expect(res.statusCode).toBe(200); 
+    expect(res.statusCode).toBe(201); 
     expect(res.body.name).toBe(product1.name); 
   });
 
@@ -86,16 +86,15 @@ describe("Test the Products Router", () => {
     const response = await request(app)
     .delete(`/api/inventory/${id.id}`)
     .set("Authorization", token)
-    .expect(200);
-    // Add more assertions as needed
+    .expect(204);
   });
 
-  test("GET /products returns all products with authentication", async () => {
+  test("GET / categories without authentication", async () => {
     const response = await request(app)
-      .get("/category/655ce51886784f07819c2d95")
+      .get("/api/shop_inventory/categories")
       .set("Authorization", token)
-      .timeout(10000)
+      .timeout(1000)
       .expect(200);
-    expect(response.body.name).toEqual('fashionwomen')
+    expect(response.body.length).toEqual(14)
   });
 });
