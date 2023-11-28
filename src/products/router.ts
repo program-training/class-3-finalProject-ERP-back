@@ -5,7 +5,6 @@ import {
   getProductByIdController,
   newProductsController,
   editProductController,
-  getCategoryByIdController,
   tenProductsController,
 } from "./controllers/productsControllers";
 
@@ -17,7 +16,6 @@ productsRouter.get("/:id", getProductByIdController);
 productsRouter.post("/", newProductsController);
 productsRouter.put("/:id", editProductController);
 productsRouter.delete("/:id", deleteProductController);
-// להעביר לshop
-productsRouter.get("/category/:id", getCategoryByIdController);
+
 
 export default productsRouter;

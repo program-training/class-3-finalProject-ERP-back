@@ -10,6 +10,7 @@ externalPointsRouter.get("/categories/:name",getProductsByCategoryController);
 externalPointsRouter.get("/", getAllProducts);
 externalPointsRouter.get("/:id", getProductByIdController);
 externalPointsRouter.post("/updateInventory",updateInventoryController);
+
                                              
 
 

@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import {
   deleteServices,
   editProductService,
-  getCategoryById,
   getProductById,
   tenProductsService,
 } from "../service/productsService";
@@ -70,17 +69,4 @@ export const editProductController = async (req: Request, res: Response) => {
   }
 };
 
-/// categories
 
-export const getCategoryByIdController = async (
-  req: Request,
-  res: Response
-) => {
-  const categoryID = req.params.id;
-  try {
-    const category = await getCategoryById(categoryID);
-    res.status(200).json(category);
-  } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
-  }
-};

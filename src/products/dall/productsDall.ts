@@ -27,8 +27,8 @@ export const tenProductsDall = async (page: number) => {
   try {
     const product = await ProductModel.find({}).skip(page).limit(12);
     return product;
-  } catch (err) {
-    return err;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -77,13 +77,3 @@ export const editProductDall = async (product: Product, id: string) => {
   }
 };
 
-/// categories
-
-export const getCategoryDall = async (categoryID: string) => {
-  try {
-    const category = await CategoriesModel.findById(categoryID);
-    return category;
-  } catch (err) {
-    return err;
-  }
-};
