@@ -2,12 +2,11 @@ import {
   getProductFromDB,
   getProductsDall,
   editProductDall,
-  getCategoryDall,
   tenProductsDall,
 } from "../dall/productsDall";
-import { productUpdate } from "../../configuration/TypeUser";
+import { productUpdate } from "../../configuration/Type";
 import { deleteDall, newProductsDall } from "../dall/productsDall";
-import { Product } from "../../configuration/TypeUser";
+import { Product } from "../../configuration/Type";
 
 export const getProductById = async (id: string) => {
   try {
@@ -32,8 +31,10 @@ export const getProductsService = async () => {
 export const tenProductsService = async (page: number) => {
   const namPage = page * 10;
   try {
-    const product = await tenProductsDall(namPage);
-    if (!product) throw new Error("no  product in the database");
+    const product = (await tenProductsDall(namPage)) as Product[];
+    if (product?.length === 0) {
+      throw new Error("no mor product in the database");
+    }
     return product;
   } catch (error) {
     return Promise.reject(error);
@@ -64,18 +65,6 @@ export const editProductService = async (product: Product, id: string) => {
     const newProduct = await editProductDall(product, id);
     if (!product) throw new Error("no  product in the database");
     return product;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-/// categories
-
-export const getCategoryById = async (categoryID: string) => {
-  try {
-    const category = await getCategoryDall(categoryID);
-    if (!category) throw new Error("no  category in the database");
-    return category;
   } catch (error) {
     return Promise.reject(error);
   }

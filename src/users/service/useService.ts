@@ -1,4 +1,4 @@
-import { userData } from '../../configuration/TypeUser';
+import { userData } from '../../configuration/Type';
 import { getUserByEmail } from '../dall/userDall';
 import { addUser } from '../dall/userDall';
 

@@ -1,6 +1,6 @@
 import { UserModel } from "../../configuration/mongooseSchema";
-import { userData } from "../../configuration/TypeUser";
-import { productUpdate } from "../../configuration/TypeUser";
+import { userData } from "../../configuration/Type";
+import { productUpdate } from "../../configuration/Type";
 
 type UserFromDB = {
   user_name: string
