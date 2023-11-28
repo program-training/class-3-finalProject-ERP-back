@@ -26,7 +26,6 @@ export const updateInventoryServices = async (products: productToUpdate[]) => {
       } else if (dataProduct) {
         const quantity = dataProduct.quantity - product.requiredQuantity;
         if (quantity < 0) {
-          console.log("2");
           toUpdates.push({
             error: `Not enough in stock for product ${product.productId}! in stock: ${dataProduct.quantity}`,
           });
