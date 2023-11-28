@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
-import { productUpdate } from "../configuration/TypeUser";
+import { productUpdate } from "../configuration/Type";
 import { CategoriesModel, ProductModel } from "../configuration/mongooseSchema";
 
 export const updateDall = async (productUpdate: productUpdate) => {

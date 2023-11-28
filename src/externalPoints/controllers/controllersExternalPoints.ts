@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getProductsService, getProductById } from "../../products/service/productsService";
 import { getProductByQuery, updateInventoryServices, categoriesFromDB, getCategoryById, getProductsByCategoryService } from "../services/servicesExternalPoints";
-import { productToUpdate } from "../../configuration/TypeUser";
+import { productToUpdate } from "../../configuration/Type";
 import { handleError } from "../../utils/handleErrors";
 
 

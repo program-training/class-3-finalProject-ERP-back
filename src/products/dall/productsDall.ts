@@ -2,8 +2,8 @@ import {
   CategoriesModel,
   ProductModel,
 } from "../../configuration/mongooseSchema";
-import { productUpdate } from "../../configuration/TypeUser";
-import { Product } from "../../configuration/TypeUser";
+import { productUpdate } from "../../configuration/Type";
+import { Product } from "../../configuration/Type";
 
 export const getProductFromDB = async (productID: string) => {
   try {
@@ -25,10 +25,10 @@ export const getProductsDall = async () => {
 
 export const tenProductsDall = async (page: number) => {
   try {
-    const product = await ProductModel.find({}).skip(page).limit(10);
+    const product = await ProductModel.find({}).skip(page).limit(12);
     return product;
-  } catch (err) {
-    return err;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -72,17 +72,6 @@ export const editProductDall = async (product: Product, id: string) => {
       new: true,
     });
     return newProduct;
-  } catch (err) {
-    return err;
-  }
-};
-
-/// categories
-
-export const getCategoryDall = async (categoryID: string) => {
-  try {
-    const category = await CategoriesModel.findById(categoryID);
-    return category;
   } catch (err) {
     return err;
   }

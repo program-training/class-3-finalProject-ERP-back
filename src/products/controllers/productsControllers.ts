@@ -2,11 +2,10 @@ import { Request, Response } from "express";
 import {
   deleteServices,
   editProductService,
-  getCategoryById,
   getProductById,
   tenProductsService,
 } from "../service/productsService";
-import { Product, productUpdate } from "../../configuration/TypeUser";
+import { Product, productUpdate } from "../../configuration/Type";
 import { getProductsService } from "../service/productsService";
 import { newProductsServices } from "../service/productsService";
 import { handleError } from "../../utils/handleErrors";
@@ -70,17 +69,4 @@ export const editProductController = async (req: Request, res: Response) => {
   }
 };
 
-/// categories
 
-export const getCategoryByIdController = async (
-  req: Request,
-  res: Response
-) => {
-  const categoryID = req.params.id;
-  try {
-    const category = await getCategoryById(categoryID);
-    res.status(200).json(category);
-  } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
-  }
-};
