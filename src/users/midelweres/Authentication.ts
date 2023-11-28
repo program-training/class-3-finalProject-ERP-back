@@ -4,6 +4,10 @@ import { userData } from '../../configuration/TypeUser';
 import { secretKey } from '../../configuration/jwt';
 
 export const Authentication = async (req: Request, res: Response, next: NextFunction) => {
+    const url = req.originalUrl
+    if(url.includes("/api/shop_inventory") || url.includes('/api/users')){
+        next()
+    }else{
     const token = req.headers['authorization']
     if (!token) {
         res.status(400).send("token is required")
@@ -14,7 +18,6 @@ export const Authentication = async (req: Request, res: Response, next: NextFunc
             res.status(400).send('Failed to verify token:' + err);
         } else {
             if (typeof (decoded) === "object") {
-                // req.body.user = { user_name: decoded.user.user_name, password: decoded.user.password } as userData
                 next();
             }
             else {
@@ -23,4 +26,5 @@ export const Authentication = async (req: Request, res: Response, next: NextFunc
             }
         }
     });
+}
 };

@@ -6,6 +6,7 @@ import { handleError } from "../../utils/handleErrors";
 
 
 export const getAllProducts = async (req: Request, res: Response) => {
+  console.log("giladf sinai")
   const search = req.query.search as string
   try {
     if (!search) {
