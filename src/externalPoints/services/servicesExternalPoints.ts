@@ -1,5 +1,5 @@
 import { getByQuery, getProductFromDB } from "../../products/dall/productsDall";
-import { updateDall, getCategoryDall, categoriesFromDall } from "../dall";
+import { updateDall, getCategoryDall, categoriesFromDall, getProductsByCategoryDall } from "../dall";
 import {
   Product,
   ordersErrors,
@@ -68,6 +68,17 @@ export const categoriesFromDB = async () => {
 export const getCategoryById = async (categoryID: string) => {
   try {
     const category = await getCategoryDall(categoryID);
+    if (!category) throw new Error("no  category in the database");
+    return category;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+
+export const getProductsByCategoryService = async (categoryName: string) => {
+  try {
+    const category = await getProductsByCategoryDall(categoryName);
     if (!category) throw new Error("no  category in the database");
     return category;
   } catch (error) {
