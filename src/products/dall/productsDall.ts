@@ -25,7 +25,7 @@ export const getProductsDall = async () => {
 
 export const tenProductsDall = async (page: number) => {
   try {
-    const product = await ProductModel.find({}).skip(page).limit(10);
+    const product = await ProductModel.find({}).skip(page).limit(12);
     return product;
   } catch (err) {
     return err;
