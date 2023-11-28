@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getProductsService, getProductById } from "../../products/service/productsService";
-import { getProductByQuery, updateInventoryServices, categoriesFromDB, getCategoryById } from "../services/servicesExternalPoints";
+import { getProductByQuery, updateInventoryServices, categoriesFromDB, getCategoryById, getProductsByCategoryService } from "../services/servicesExternalPoints";
 import { productToUpdate } from "../../configuration/TypeUser";
 import { handleError } from "../../utils/handleErrors";
 
@@ -55,6 +55,16 @@ export const getCategoryByIdController = async (req: Request, res: Response) => 
   try {
     const category = await getCategoryById(categoryID);
     res.status(200).json(category);
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 400);
+  }
+};
+
+export const getProductsByCategoryController = async (req: Request, res: Response) => {
+  const categoryName = req.params.name;
+  try {
+    const categoryProducts = await getProductsByCategoryService(categoryName);
+    res.status(200).json(categoryProducts);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 400);
   }
