@@ -23,6 +23,15 @@ export const getProductsDall = async () => {
   }
 };
 
+export const tenProductsDall = async (page: number) => {
+  try {
+    const product = await ProductModel.find({}).skip(page).limit(10);
+    return product;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const getByQuery = async (searchTerm: string) => {
   try {
     const regex = new RegExp(searchTerm, "i");
