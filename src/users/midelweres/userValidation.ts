@@ -2,6 +2,7 @@ import * as yup from 'yup';
 import { Request, Response, NextFunction } from 'express';
 import { userData } from '../../configuration/TypeUser';
 import { Error } from 'mongoose';
+import { handleError } from '../../utils/handleErrors';
 
 export const validateData = async (req: Request, res: Response, next: NextFunction) => {
   const userFromClient = req.body
@@ -22,8 +23,7 @@ export const validateData = async (req: Request, res: Response, next: NextFuncti
     await schema.validate(userFromClient);
     req.body.userValid = { user_name: userFromClient.user_name, password: userFromClient.password } as userData
     next();
-  } catch (error: any) {
-    console.error(error);
-    res.status(400).send(error.message);
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 400);
   }
 };

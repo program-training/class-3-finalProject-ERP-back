@@ -14,7 +14,7 @@ export const register = async (user: userData) => {
         else {
             return Promise.reject(new Error("user is Already exists"))
         }
-    } catch (error: any) {
+    } catch (error) {
         return Promise.reject(error);
     }
 };
