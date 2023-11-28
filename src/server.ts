@@ -4,6 +4,7 @@ import {corsOrigin as cors} from './cors/cors';
 import router from "./router";
 import { connectToDatabase } from "./configuration/mongoDB";
 import dotenv from 'dotenv';
+import { Authentication } from './users/midelweres/Authentication';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const port = process.env.PORT;
 export const app = express();
 
 app.use(cors)
+app.use(Authentication)
 app.use(express.json());
 app.use(router)
 
