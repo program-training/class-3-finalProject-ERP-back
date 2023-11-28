@@ -1,5 +1,10 @@
 import { getByQuery, getProductFromDB } from "../../products/dall/productsDall";
-import { updateDall, getCategoryDall, categoriesFromDall, getProductsByCategoryDall } from "../dall";
+import {
+  updateDall,
+  getCategoryDall,
+  categoriesFromDall,
+  getProductsByCategoryDall,
+} from "../dall";
 import {
   Product,
   ordersErrors,
@@ -14,16 +19,18 @@ export const updateInventoryServices = async (products: productToUpdate[]) => {
       const dataProduct = (await getProductFromDB(
         product.productId
       )) as Product;
-      if (!dataProduct) {
+      if (!dataProduct.quantity) {
         toUpdates.push({
           error: `No such product in the database: ${product.productId}`,
         });
-      }
-      const quantity = dataProduct.quantity - product.requiredQuantity;
-      if (quantity < 0) {
-        toUpdates.push({
-          error: `Not enough in stock for product ${product.productId}! in stock: ${dataProduct.quantity}`,
-        });
+      } else if (dataProduct) {
+        const quantity = dataProduct.quantity - product.requiredQuantity;
+        if (quantity < 0) {
+          console.log("2");
+          toUpdates.push({
+            error: `Not enough in stock for product ${product.productId}! in stock: ${dataProduct.quantity}`,
+          });
+        }
       }
     }
 
@@ -74,7 +81,6 @@ export const getCategoryById = async (categoryID: string) => {
     return Promise.reject(error);
   }
 };
-
 
 export const getProductsByCategoryService = async (categoryName: string) => {
   try {
