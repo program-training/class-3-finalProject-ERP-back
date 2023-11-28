@@ -14,9 +14,18 @@ export const getProductFromDB = async (productID: string) => {
   }
 };
 
-export const getProductDall = async () => {
+export const getProductsDall = async () => {
   try {
     const product = await ProductModel.find({});
+    return product;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const tenProductsDall = async (page: number) => {
+  try {
+    const product = await ProductModel.find({}).skip(page).limit(10);
     return product;
   } catch (err) {
     return err;
