@@ -2,7 +2,7 @@
 // import { User } from "../../configuration/Userinterface";
 // import { register, getToken } from "../services/apiServices";
 import { Request, Response } from "express";
-import { userData } from "../../configuration/TypeUser";
+import { userData } from "../../configuration/Type";
 import { register } from "../service/useService";
 import { getToken } from "../../services/apiServices";
 import { handleError } from "../../utils/handleErrors";

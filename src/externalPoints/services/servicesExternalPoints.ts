@@ -4,7 +4,7 @@ import {
   Product,
   ordersErrors,
   productToUpdate,
-} from "../../configuration/TypeUser";
+} from "../../configuration/Type";
 
 export const updateInventoryServices = async (products: productToUpdate[]) => {
   try {
