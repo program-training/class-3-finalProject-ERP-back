@@ -9,7 +9,6 @@ export const Authentication = async (
   next: NextFunction
 ) => {
   const url = req.originalUrl;
-  console.log(url);
   if (url.includes("/api/shop_inventory") || url.includes("/api/users")) {
     next();
   } else {
