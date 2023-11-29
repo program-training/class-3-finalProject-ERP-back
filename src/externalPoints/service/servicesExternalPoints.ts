@@ -1,19 +1,23 @@
-import { getByQuery, getProductFromDB } from "../../products/dall/productsDall";
-import { updateDall, getCategoryDall, categoriesFromDall, getProductsByCategoryDall } from "../dall";
+import { getProductByIdDB } from "../../products/dall/productsDall";
+import {
+  updateDB,
+  getCategoryByIdDB,
+  getCategoriesDB,
+  getProductsByCategoryDB,
+  getProductsByQueryDB,
+} from "../dall/dallExternalPoints";
 import {
   Product,
   ordersErrors,
   productToUpdate,
-} from "../../configuration/Type";
+} from "../../configuration/Types";
 
-export const updateInventoryServices = async (products: productToUpdate[]) => {
+export const updateInventory = async (products: productToUpdate[]) => {
   try {
     const updates: productToUpdate[] = [];
     const toUpdates: ordersErrors[] = [];
     for (const product of products) {
-      const dataProduct = (await getProductFromDB(
-        product.productId
-      )) as Product;
+      const dataProduct = (await getProductByIdDB(product.productId)) as Product;
       if (!dataProduct) {
         toUpdates.push({
           error: `No such product in the database: ${product.productId}`,
@@ -29,13 +33,13 @@ export const updateInventoryServices = async (products: productToUpdate[]) => {
 
     if (toUpdates.length === 0) {
       for (const product of products) {
-        const dataProduct = (await getProductFromDB(
+        const dataProduct = (await getProductByIdDB(
           product.productId
         )) as Product;
         if (dataProduct) {
           const newQuantity = dataProduct.quantity - product.requiredQuantity;
           product.requiredQuantity = newQuantity;
-          const update = await updateDall(product);
+          const update = await updateDB(product);
           if (update) updates.push(product);
         }
       }
@@ -47,18 +51,18 @@ export const updateInventoryServices = async (products: productToUpdate[]) => {
   }
 };
 
-export const getProductByQuery = async (search: string) => {
+export const getProductsByQuery = async (search: string) => {
   try {
-    const product = await getByQuery(search);
+    const product = await getProductsByQueryDB(search);
     return product;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const categoriesFromDB = async () => {
+export const getCategories = async () => {
   try {
-    const categories = await categoriesFromDall();
+    const categories = await getCategoriesDB();
     return categories;
   } catch (error) {
     return Promise.reject(error);
@@ -67,7 +71,7 @@ export const categoriesFromDB = async () => {
 
 export const getCategoryById = async (categoryID: string) => {
   try {
-    const category = await getCategoryDall(categoryID);
+    const category = await getCategoryByIdDB(categoryID);
     if (!category) throw new Error("no  category in the database");
     return category;
   } catch (error) {
@@ -75,10 +79,9 @@ export const getCategoryById = async (categoryID: string) => {
   }
 };
 
-
-export const getProductsByCategoryService = async (categoryName: string) => {
+export const getProductsByCategory = async (categoryName: string) => {
   try {
-    const category = await getProductsByCategoryDall(categoryName);
+    const category = await getProductsByCategoryDB(categoryName);
     if (!category) throw new Error("no  category in the database");
     return category;
   } catch (error) {
