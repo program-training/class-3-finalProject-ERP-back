@@ -1,15 +1,7 @@
 import { UserModel } from "../../configuration/mongooseSchema";
-import { userData } from "../../configuration/Type";
-import { productUpdate } from "../../configuration/Type";
+import { userData, userFromDB } from "../../configuration/Types";
 
-type UserFromDB = {
-  user_name: string
-  password: string
-  _id: object | string
-  __v: 0
-}
-
-export const getUserByEmail = async (email: string) => {
+export const getUserByUserNameDB = async (email: string) => {
   try {
     const document = await UserModel.findOne({ user_name: email });
     if (!document) {
@@ -22,10 +14,10 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
-export const addUser = async (user: userData) => {
+export const signUpDB = async (user: userData) => {
   const newUser = new UserModel(user);
   try {
-    const userFromDB = await newUser.save() as UserFromDB
+    const userFromDB = (await newUser.save()) as userFromDB;
     userFromDB._id = userFromDB._id.toString();
     return userFromDB;
   } catch (err) {

@@ -2,6 +2,12 @@ export type userData = {
   user_name: string;
   password: string;
 };
+export type userFromDB = {
+  user_name: string;
+  password: string;
+  _id: object | string;
+  __v: number;
+};
 
 export type ordersErrors = {
   error: string;
@@ -16,7 +22,7 @@ export type productToUpdate = {
   requiredQuantity: number;
 };
 export type Product = {
-  _id?:string
+  _id?: string;
   name: string;
   salePrice: number;
   quantity: number;
@@ -24,10 +30,9 @@ export type Product = {
   category: string;
   discountPercentage: number;
   image: {
-    large:  string;
+    large: string;
     medium: string;
     small: string;
     alt: string;
   };
 };
-
