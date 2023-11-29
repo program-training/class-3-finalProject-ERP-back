@@ -29,7 +29,7 @@ export const getProductsService = async () => {
 };
 
 export const tenProductsService = async (page: number) => {
-  const namPage = page * 10;
+  const namPage = page * 12;
   try {
     const product = (await tenProductsDall(namPage)) as Product[];
     if (product?.length === 0) {

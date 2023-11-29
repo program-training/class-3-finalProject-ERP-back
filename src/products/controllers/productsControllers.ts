@@ -30,6 +30,7 @@ export const allProductsController = async (req: Request, res: Response) => {
 };
 
 export const tenProductsController = async (req: Request, res: Response) => {
+  console.log("gilad")
   const page = Number(req.params.product);
   try {
     const allProducts = await tenProductsService(page);
