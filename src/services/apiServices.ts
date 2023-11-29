@@ -12,7 +12,7 @@ export const getToken = async (user:userFromDB) => {
     if (usersFromDB.password !== user.password) {
       return Promise.reject(new Error("The password is incorrect!"));
     }
-    const id = user._id.toString()
+    const id = user._id
     const token = jwt.sign({ id }, secretKey, { expiresIn: "30d" });
     return token;
   } catch (error) {
