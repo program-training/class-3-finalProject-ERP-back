@@ -10,9 +10,10 @@ import {
 
 const productsRouter = express.Router();
 
-productsRouter.get("/:id", getProductByIdController);
+
 productsRouter.get("/", allProductsController);
-// productsRouter.get("/:product", tenProductsController);
+productsRouter.get("/product/:page", tenProductsController);
+productsRouter.get("/:id", getProductByIdController);
 productsRouter.post("/", newProductsController);
 productsRouter.put("/:id", editProductController);
 productsRouter.delete("/:id", deleteProductController);

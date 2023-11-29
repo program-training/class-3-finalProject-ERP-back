@@ -2,7 +2,7 @@
   "name": "store_server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.ts",
+  "main": "dist/server.js",
   "scripts": {
     "test": "jest",
     "dev": "nodemon --exec ts-node .",

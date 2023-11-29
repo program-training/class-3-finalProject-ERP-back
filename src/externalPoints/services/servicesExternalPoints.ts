@@ -19,7 +19,8 @@ export const updateInventoryServices = async (products: productToUpdate[]) => {
       const dataProduct = (await getProductFromDB(
         product.productId
       )) as Product;
-      if (!dataProduct.quantity) {
+
+      if (!dataProduct || !dataProduct.category) {
         toUpdates.push({
           error: `No such product in the database: ${product.productId}`,
         });
