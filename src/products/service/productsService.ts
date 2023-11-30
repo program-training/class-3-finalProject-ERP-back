@@ -1,16 +1,16 @@
+import { Product } from "../../configuration/Types";
 import {
-  getProductFromDB,
-  getProductsDall,
-  editProductDall,
-  tenProductsDall,
+  getProductByIdDB,
+  allProductsDB,
+  editProductDB,
+  OneProductPageDB,
+  deleteProductDB,
+  newProductDB,
 } from "../dall/productsDall";
-import { productUpdate } from "../../configuration/Type";
-import { deleteDall, newProductsDall } from "../dall/productsDall";
-import { Product } from "../../configuration/Type";
 
 export const getProductById = async (id: string) => {
   try {
-    const product = await getProductFromDB(id);
+    const product = await getProductByIdDB(id);
     if (!product) throw new Error("no such product in the database");
     return product;
   } catch (error) {
@@ -18,32 +18,32 @@ export const getProductById = async (id: string) => {
   }
 };
 
-export const getProductsService = async () => {
+export const allProducts = async () => {
   try {
-    const product = await getProductsDall();
-    if (!product) throw new Error("no  product in the database");
-    return product;
+    const products = await allProductsDB();
+    if (!products) throw new Error("no products in the database");
+    return products;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const tenProductsService = async (page: number) => {
-  const namPage = page * 12;
+export const OneProductPage = async (page: number) => {
+  const ProductPlacement = page * 12;
   try {
-    const product = (await tenProductsDall(namPage)) as Product[];
-    if (product?.length === 0) {
+    const productד = (await OneProductPageDB(ProductPlacement)) as Product[];
+    if (productד?.length === 0) {
       throw new Error("no mor product in the database");
     }
-    return product;
+    return productד;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const deleteServices = async (id: string) => {
+export const deleteProduct = async (id: string) => {
   try {
-    const deleteOne = await deleteDall(id);
+    const deleteOne = await deleteProductDB(id);
     if (!deleteOne) throw new Error("no such product in the database");
     return deleteOne;
   } catch (error) {
@@ -51,20 +51,19 @@ export const deleteServices = async (id: string) => {
   }
 };
 
-export const newProductsServices = async (product: Product) => {
+export const newProduct = async (product: Product) => {
   try {
-    const newProduct = await newProductsDall(product);
+    const newProduct = await newProductDB(product);
     return newProduct;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const editProductService = async (product: Product, id: string) => {
+export const editProductS = async (product: Product, id: string) => {
   try {
-    const newProduct = await editProductDall(product, id);
-    if (!product) throw new Error("no  product in the database");
-    return product;
+    const editProduct = await editProductDB(product, id);
+    return editProduct;
   } catch (error) {
     return Promise.reject(error);
   }

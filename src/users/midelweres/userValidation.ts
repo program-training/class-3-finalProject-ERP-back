@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { Request, Response, NextFunction } from 'express';
-import { userData } from '../../configuration/Type';
+import { userData } from '../../configuration/Types';
 import { Error } from 'mongoose';
 import { handleError } from '../../utils/handleErrors';
 
