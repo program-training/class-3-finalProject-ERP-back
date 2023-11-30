@@ -31,11 +31,11 @@ export const allProducts = async () => {
 export const OneProductPage = async (page: number) => {
   const ProductPlacement = page * 12;
   try {
-    const productד = (await OneProductPageDB(ProductPlacement)) as Product[];
-    if (productד?.length === 0) {
+    const product = (await OneProductPageDB(ProductPlacement)) as Product[];
+    if (product?.length === 0) {
       throw new Error("no mor product in the database");
     }
-    return productד;
+    return product;
   } catch (error) {
     return Promise.reject(error);
   }
