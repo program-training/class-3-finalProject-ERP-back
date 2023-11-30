@@ -1,11 +1,7 @@
-import {
-  CategoriesModel,
-  ProductModel,
-} from "../../configuration/mongooseSchema";
-import { productUpdate } from "../../configuration/Type";
-import { Product } from "../../configuration/Type";
+import { ProductModel } from "../../configuration/mongooseSchema";
+import { Product } from "../../configuration/Types";
 
-export const getProductFromDB = async (productID: string) => {
+export const getProductByIdDB = async (productID: string) => {
   try {
     const product = await ProductModel.findById(productID);
     return product;
@@ -14,65 +10,50 @@ export const getProductFromDB = async (productID: string) => {
   }
 };
 
-export const getProductsDall = async () => {
+export const allProductsDB = async () => {
   try {
-    const product = await ProductModel.find({});
-    return product;
+    const products = await ProductModel.find({});
+    return products;
   } catch (err) {
     return err;
   }
 };
 
-export const tenProductsDall = async (page: number) => {
+export const OneProductPageDB = async (ProductPlacement: number) => {
   try {
-    const product = await ProductModel.find({}).skip(page).limit(12);
-    return product;
+    const products = await ProductModel.find({})
+      .skip(ProductPlacement)
+      .limit(12);
+    return products;
   } catch (error) {
     return error;
   }
 };
 
-export const getByQuery = async (searchTerm: string) => {
-  try {
-    const regex = new RegExp(searchTerm, "i");
-    const result = await ProductModel.find({
-      $or: [{ name: regex }, { description: regex }, { category: regex }],
-    });
-    if (!result || result.length === 0) {
-      throw new Error("not found results");
-    }
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const deleteDall = async (id: string) => {
+export const deleteProductDB = async (id: string) => {
   try {
     const product = await ProductModel.findByIdAndDelete(id);
     return product;
-  } catch (err) {
-    return err;
+  } catch (error) {
+    return error;
   }
 };
 
-export const newProductsDall = async (product: Product) => {
-  const newUser = new ProductModel(product);
+export const newProductDB = async (product: Product) => {
+  const newProduct = new ProductModel(product);
   try {
-    const newProduct = await newUser.save();
-    return newProduct;
-  } catch (err) {
-    return err;
+    const product = await newProduct.save();
+    return product;
+  } catch (error) {
+    return error;
   }
 };
 
-export const editProductDall = async (product: Product, id: string) => {
+export const editProductDB = async (product: Product, id: string) => {
   try {
-    const newProduct = await ProductModel.findByIdAndUpdate(id, product, {
-      new: true,
-    });
-    return newProduct;
-  } catch (err) {
-    return err;
+    const editProduct = await ProductModel.findByIdAndUpdate(id, product);
+    return editProduct;
+  } catch {
+    throw new Error("no such product in the database");
   }
 };

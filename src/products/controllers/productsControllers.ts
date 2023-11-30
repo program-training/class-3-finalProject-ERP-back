@@ -1,16 +1,25 @@
 import { Request, Response } from "express";
-import {
-  deleteServices,
-  editProductService,
-  getProductById,
-  tenProductsService,
-} from "../service/productsService";
-import { Product, productUpdate } from "../../configuration/Type";
-import { getProductsService } from "../service/productsService";
-import { newProductsServices } from "../service/productsService";
+import { Product } from "../../configuration/Types";
 import { handleError } from "../../utils/handleErrors";
+import {
+  deleteProduct,
+  editProductS,
+  getProductById,
+  OneProductPage,
+  allProducts,
+  newProduct,
+} from "../service/productsService";
 
-export const getProductByIdController = async (req: Request, res: Response) => {
+export const allProductsC = async (req: Request, res: Response) => {
+  try {
+    const allProduct = await allProducts();
+    res.status(200).json(allProduct);
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 500);
+  }
+};
+
+export const getProductByIdC = async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
     const product = await getProductById(id);
@@ -20,54 +29,42 @@ export const getProductByIdController = async (req: Request, res: Response) => {
   }
 };
 
-export const allProductsController = async (req: Request, res: Response) => {
+export const OneProductPageC = async (req: Request, res: Response) => {
+  const page = Number(req.params.page);
   try {
-    const allProducts = await getProductsService();
-    res.status(200).json(allProducts);
+    const Products = await OneProductPage(page);
+    res.status(200).json(Products);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 500);
   }
 };
 
-export const tenProductsController = async (req: Request, res: Response) => {
-  console.log("gilad")
-  const page = Number(req.params.product);
-  try {
-    const allProducts = await tenProductsService(page);
-    res.status(200).json(allProducts);
-  } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
-  }
-};
-
-export const deleteProductController = async (req: Request, res: Response) => {
+export const deleteProductC = async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
-    const deleteOne = await deleteServices(id);
+    const deleteOne = await deleteProduct(id);
     res.status(204).json(deleteOne);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 500);
   }
 };
 
-export const newProductsController = async (req: Request, res: Response) => {
+export const newProductC = async (req: Request, res: Response) => {
   try {
-    const newProduct = await newProductsServices(req.body);
-    res.status(201).json(newProduct);
+    const NewProduct = await newProduct(req.body);
+    res.status(201).json(NewProduct);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 500);
   }
 };
 
-export const editProductController = async (req: Request, res: Response) => {
+export const editProductC = async (req: Request, res: Response) => {
   const id = req.params.id;
   const product = req.body as Product;
   try {
-    const newProduct = await editProductService(product, id);
-    res.status(200).json(newProduct);
+    const editProduct = await editProductS(product, id);
+    res.status(200).json(editProduct);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 500);
   }
 };
-
-
