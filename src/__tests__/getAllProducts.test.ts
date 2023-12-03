@@ -46,7 +46,7 @@ const token =
 describe("Test the Products Router", () => {
   test("GET /products returns all products with authentication", async () => {
     const response = await request(app)
-      .get("/api/inventory/")
+      .get("/inventory/")
       .set("Authorization", token)
       .timeout(10000)
       .expect(200);
@@ -55,16 +55,16 @@ describe("Test the Products Router", () => {
 
   test("GET /products/:id returns a product by ID", async () => {
     const res = await request(app)
-      .get("/api/inventory/655f1cc1dab13343a8db7984")
+      .get("/inventory/655f1cc1dab13343a8db7984")
       .set("Authorization", token)
       .expect(200);
     console.log(res.body.name);
       
   });
 
-  test("POST /api/inventory adds a new product", async () => {
+  test("POST /inventory adds a new product", async () => {
     const res = await request(app)
-      .post("/api/inventory/")
+      .post("/inventory/")
       .set("Authorization", token)
       .send(product1)
       .timeout(1000);
@@ -75,7 +75,7 @@ describe("Test the Products Router", () => {
 
   test("PUT /products/:id updates a product", async () => {
     const response = await request(app)
-    .put(`/api/inventory/${id.id}`)
+    .put(`/inventory/${id.id}`)
     .set("Authorization", token)
     .send(product2)
     .expect(200);
@@ -84,14 +84,14 @@ describe("Test the Products Router", () => {
 
   test("DELETE /products/:id deletes a product", async () => {
     const response = await request(app)
-    .delete(`/api/inventory/${id.id}`)
+    .delete(`/inventory/${id.id}`)
     .set("Authorization", token)
     .expect(204);
   });
 
   test("GET / categories without authentication", async () => {
     const response = await request(app)
-      .get("/api/shop_inventory/categories")
+      .get("/shop_inventory/categories")
       .set("Authorization", token)
       .timeout(1000)
       .expect(200);
