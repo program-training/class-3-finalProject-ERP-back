@@ -10,32 +10,32 @@ import {
   newProduct,
 } from "../service/productsService";
 
-export const allProductsC = async (req: Request, res: Response) => {
+export const allProductsC = async () => {
   try {
     const allProduct = await allProducts();
-    res.status(200).json(allProduct);
+    return allProduct;
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error) return ;
   }
 };
 
-export const getProductByIdC = async (req: Request, res: Response) => {
-  const id = req.params.id;
+export const getProductByIdC = async (perent: any, args: any) => {
+  const id = args.id;
   try {
     const product = await getProductById(id);
-    res.status(200).json(product);
+    return product;
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error) return;
   }
 };
 
-export const OneProductPageC = async (req: Request, res: Response) => {
-  const page = Number(req.params.page);
+export const OneProductPageC = async (perent: any, args: any) => {
+  const page = args.page;
   try {
     const Products = await OneProductPage(page);
-    res.status(200).json(Products);
+    return Products ;
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error) return handleError(perent, error, 500);
   }
 };
 
@@ -49,12 +49,12 @@ export const deleteProductC = async (req: Request, res: Response) => {
   }
 };
 
-export const newProductC = async (req: Request, res: Response) => {
+export const newProductC = async (perent: any, args: any) => {
   try {
-    const NewProduct = await newProduct(req.body);
-    res.status(201).json(NewProduct);
+    const NewProduct = await newProduct(args.body);
+    return NewProduct
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error) return handleError(perent, error, 500);
   }
 };
 

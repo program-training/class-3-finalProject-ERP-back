@@ -1,25 +1,30 @@
-import { Request, Response } from "express";
 import { userData } from "../../configuration/Types";
 import { signUp } from "../service/useService";
 import { getToken } from "../../services/apiServices";
 import { handleError } from "../../utils/handleErrors";
 
-export const signUpC = async (req: Request, res: Response) => {
+
+export const signUpC = async (perent: any, args: any) => {
   try {
-    const user = req.body.userValid as userData;
+    const user = args as userData;
     const newUser = await signUp(user);
     const token = await getToken(newUser);
-    return res.status(200).send(token);
+    const arr = {Token:token}
+    console.log(arr)
+    return arr
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error) return handleError(perent, error, 500);
   }
 };
-export const logInC = async (req: Request, res: Response) => {
+export const logInC = async (parent:any, args:any) => {
+  console.log(args)
   try {
-    const user = req.body;
+    const user = args
     const token = await getToken(user);
-    res.status(200).send(token);
+    const arr = {Token:token}
+    console.log(arr)
+    return arr
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 400);
+    if (error instanceof Error) return handleError(parent, error, 400);
   }
 };
