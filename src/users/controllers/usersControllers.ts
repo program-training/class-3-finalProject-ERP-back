@@ -4,22 +4,24 @@ import { signUp } from "../service/useService";
 import { getToken } from "../../services/apiServices";
 import { handleError } from "../../utils/handleErrors";
 
-export const signUpC = async (req: Request, res: Response) => {
+export const signUpC = async (args:userData) => {
   try {
-    const user = req.body.userValid as userData;
+    const user = args
     const newUser = await signUp(user);
     const token = await getToken(newUser);
-    return res.status(200).send(token);
+    return token
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error) return error.message
   }
 };
-export const logInC = async (req: Request, res: Response) => {
+export const logInC = async (args:any) => {
   try {
-    const user = req.body;
+    const user = args;
     const token = await getToken(user);
-    res.status(200).send(token);
+    return token
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 400);
+    if (error instanceof Error) return error.message
+    
+    // if (error instanceof Error) return handleError(res, error, 400);
   }
 };
