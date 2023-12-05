@@ -10,28 +10,28 @@ import {
   getProductsByCategory,
 } from "../service/servicesExternalPoints";
 
-export const getAllProductsC = async (req: Request, res: Response) => {
-  const search = req.query.search as string;
+export const getAllProductsC = async (args: any) => {
+  const search = args.search
   try {
     if (!search) {
       const allProduct = await allProducts();
-      res.status(200).send(allProduct);
+      return allProduct
     } else {
       const result = await getProductsByQuery(search);
-      res.status(200).send(result);
+      return result
     }
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error);
+    if (error instanceof Error) return error.message
   }
 };
 
-export const updateInventoryC = async (req: Request, res: Response) => {
-  const product = req.body as productToUpdate[];
+export const updateInventoryC = async (args:any) => {
+  const product = args.up
   try {
     const data = await updateInventory(product);
-    res.status(200).json(data);
+    return(data);
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 400);
+    if (error instanceof Error) return error.message;
   }
 };
 
