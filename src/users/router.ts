@@ -11,11 +11,5 @@ import { register } from "module";
 const usersRouter = express.Router();
 
 // Resolver
-export const root = {
-    logIn: logInC,
-    signUp: signUpC,
-    externalCategories: getCategoriesC,
-    externalCategory: getCategoryByIdC,
-};
 
 export default usersRouter

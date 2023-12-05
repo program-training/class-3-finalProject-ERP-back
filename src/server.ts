@@ -16,6 +16,8 @@ import {
 import {
   updateInventoryC,
   getAllProductsC,
+  getCategoriesC,
+  getCategoryByIdC,
 } from "./externalPoints/controllers/controllersExternalPoints";
 
 
@@ -24,6 +26,7 @@ dotenv.config();
 export const app = express();
 
 app.use(cors);
+
 const root = {
   logIn: logInC,
   signUp: signUpC,
@@ -35,6 +38,8 @@ const root = {
   externalProducts: getAllProductsC,
   newProduct: newProductC,
   editProduct: editProductC,
+  externalCategories: getCategoriesC,
+  externalCategory: getCategoryByIdC,
 };
 app.use(
   "/graphql",
