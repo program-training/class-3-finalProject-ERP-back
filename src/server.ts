@@ -3,22 +3,8 @@ import { corsOrigin as cors } from "./cors/cors";
 import { connectToDatabase } from "./configuration/mongoDB";
 import dotenv from "dotenv";
 import { graphqlHTTP } from "express-graphql";
-import { schema } from "./users/schema/schema";
-import { logInC, signUpC } from "./users/controllers/usersControllers";
-import {
-  OneProductPageC,
-  allProductsC,
-  deleteProductC,
-  getProductByIdC,
-  editProductC,
-  newProductC,
-} from "./products/controllers/productsControllers";
-import {
-  updateInventoryC,
-  getAllProductsC,
-  getCategoriesC,
-  getCategoryByIdC,
-} from "./externalPoints/controllers/controllersExternalPoints";
+import { schema } from "./graphQL/schema";
+import { root } from "./graphQL/rootValue";
 
 
 const port = process.env.PORT;
@@ -27,20 +13,7 @@ export const app = express();
 
 app.use(cors);
 
-const root = {
-  logIn: logInC,
-  signUp: signUpC,
-  allProducts: allProductsC,
-  OneProductPage: OneProductPageC,
-  getProductById: getProductByIdC,
-  deleteProduct: deleteProductC,
-  ExternalUpdateInventory: updateInventoryC,
-  externalProducts: getAllProductsC,
-  newProduct: newProductC,
-  editProduct: editProductC,
-  externalCategories: getCategoriesC,
-  externalCategory: getCategoryByIdC,
-};
+
 app.use(
   "/graphql",
   graphqlHTTP({
