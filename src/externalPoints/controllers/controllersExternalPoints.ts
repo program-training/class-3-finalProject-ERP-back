@@ -25,13 +25,13 @@ export const getAllProductsC = async (req: Request, res: Response) => {
   }
 };
 
-export const updateInventoryC = async (req: Request, res: Response) => {
-  const product = req.body as productToUpdate[];
+export const updateInventoryC = async (args:any) => {
+  const product = args.up
   try {
     const data = await updateInventory(product);
-    res.status(200).json(data);
+    return(data);
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 400);
+    if (error instanceof Error) return error.message;
   }
 };
 

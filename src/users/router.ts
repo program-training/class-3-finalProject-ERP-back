@@ -38,12 +38,7 @@ function getImages(args: any) {
 }
 
 // Resolver
-export const root = {
-    logIn: logInC,
-    signUp: signUpC,
-    image: getImage,
-    images: getImages,
-};
+
 
 
 
