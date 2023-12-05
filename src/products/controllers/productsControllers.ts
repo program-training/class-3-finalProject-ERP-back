@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { Product } from "../../configuration/Types";
-import { handleError } from "../../utils/handleErrors";
+// import { Request, Response } from "express";
+// import { Product } from "../../configuration/Types";
+// import { handleError } from "../../utils/handleErrors";
 import {
   deleteProduct,
   editProductS,
@@ -49,22 +49,28 @@ export const deleteProductC = async (args:any) => {
   }
 };
 
-export const newProductC = async (req: Request, res: Response) => {
+export const newProductC = async (args: any) => {
   try {
-    const NewProduct = await newProduct(req.body);
-    res.status(201).json(NewProduct);
+    const { productInput } = args
+    const NewProduct = await newProduct(productInput);
+    return NewProduct
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error) return error.message
   }
 };
 
-export const editProductC = async (req: Request, res: Response) => {
-  const id = req.params.id;
-  const product = req.body as Product;
+export const editProductC = async (args: any) => {
+  const { productInput } = args
+  const id = productInput._id
+  const product = productInput
   try {
     const editProduct = await editProductS(product, id);
-    res.status(200).json(editProduct);
+    console.log();
+    
+    return editProduct
   } catch (error) {
-    if (error instanceof Error) return handleError(res, error, 500);
+    if (error instanceof Error)console.log(error.message);
+    
+    if (error instanceof Error) return error.message
   }
 };

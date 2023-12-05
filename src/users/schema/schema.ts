@@ -32,14 +32,47 @@ input productToUpdateInput  {
       type Query {
         allProducts:[Product]
         OneProductPage(page:Int):[Product]
-        deleteProduct(id:String):Product
         getProductById(id:String):Product
-        logIn(user_name: String! password:String!):String
-        signUp(user_name: String! password:String!):String
-        updateInventory(up:productToUpdateInput):[productToUpdate]
-
-       
-     
+        externalProducts(search: String): [Product]
       }
     
+
+
+    type Mutation {
+      updateInventory(up:productToUpdateInput):[productToUpdate]
+      deleteProduct(id:String):Product
+      logIn(user_name: String! password:String!):String
+      signUp(user_name: String! password:String!):String
+    newProduct(productInput: ProductInput!):Product
+    editProduct(productInput: editProductInput!):Product
+    }
+    input ProductInput {
+    name: String
+    salePrice: Int
+    quantity: Int
+    description: String
+    category: String
+    discountPercentage: Int
+    image: ImageInput
+    }
+
+    input editProductInput {
+        _id: String
+        name: String
+        salePrice: Int
+        quantity: Int
+        description: String
+        category: String
+        discountPercentage: Int
+        image: ImageInput
+        }
+
+
+    input ImageInput {
+        large: String
+        medium: String
+        small: String
+        alt: String
+    }
+
 `);

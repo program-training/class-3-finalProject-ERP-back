@@ -5,6 +5,8 @@ import { getToken } from "../../services/apiServices";
 import { handleError } from "../../utils/handleErrors";
 
 export const signUpC = async (args:userData) => {
+  console.log(args);
+  
   try {
     const user = args
     const newUser = await signUp(user);
