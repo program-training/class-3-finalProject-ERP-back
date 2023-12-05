@@ -6,10 +6,6 @@ import { graphqlHTTP } from "express-graphql";
 import { register } from "module";
 const usersRouter = express.Router();
 
-// usersRouter.post("/register", validateData, signUpC);
-// usersRouter.post("/logIn", logInC);
-
-
 
 
 const imagesData = [
@@ -42,35 +38,13 @@ function getImages(args: any) {
 }
 
 // Resolver
-const root = {
-    logIn: async (args: any) => {
-        try {
-            const result = await logInC(args);
-            return result;
-        } catch (error) {
-            throw error;
-        }
-    },
-    signUp: async (args: any) => {
-        try {
-            const result = await signUpC(args);
-            return result;
-        } catch (error) {
-            throw error;
-        }
-    },
+export const root = {
+    logIn: logInC,
+    signUp: signUpC,
     image: getImage,
     images: getImages,
 };
 
-usersRouter.use(
-    "/graphql",
-    graphqlHTTP({
-        schema: schema,
-        rootValue: root,
-        graphiql: true,
-    })
-);
 
 
 export default usersRouter
