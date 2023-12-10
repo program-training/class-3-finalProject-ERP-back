@@ -8,12 +8,23 @@ import {
   OneProductPage,
   allProducts,
   newProduct,
+  dataGraf,
 } from "../service/productsService";
 
 export const allProductsC = async (req: Request, res: Response) => {
   try {
     const allProduct = await allProducts();
     res.status(200).json(allProduct);
+  } catch (error) {
+    if (error instanceof Error) return handleError(res, error, 500);
+  }
+};
+export const dataGrafC = async (req: Request, res: Response) => {
+  try {
+    const data = await dataGraf();
+    console.log("sinai")
+    console.log(data)
+    res.status(200).json(data);
   } catch (error) {
     if (error instanceof Error) return handleError(res, error, 500);
   }

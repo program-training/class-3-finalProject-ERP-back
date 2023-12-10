@@ -6,11 +6,13 @@ import {
   newProductC,
   editProductC,
   OneProductPageC,
+  dataGrafC,
 } from "./controllers/productsControllers";
 
 const products = express.Router();
 
 products.get("/", allProductsC);
+products.get("/dataGraf", dataGrafC);
 products.get("/products/:page", OneProductPageC);
 products.get("/:id", getProductByIdC);
 products.post("/", newProductC);
