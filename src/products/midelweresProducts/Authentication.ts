@@ -8,7 +8,7 @@ export const Authentication = async (
   next: NextFunction
 ) => {
   const url = req.originalUrl;
-  if (url.includes("/api/shop_inventory") || url.includes("/api/users")) {
+  if (url.includes("/shop_inventory") || url.includes("/users")) {
     next();
   } else {
     const token = req.headers["authorization"];
