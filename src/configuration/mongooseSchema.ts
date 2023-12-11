@@ -26,10 +26,21 @@ const ProductSchema = new Schema({
   },
 });
 
+const GrafSchema = new Schema({
+  product_id: { type: String, required: true },
+  afteter: { type: Number, required: true },
+  before: { type: Number, required: true },
+  changes:{ type: [Number], required: true },
+  time:{ type: String, required: true },
+});
+
+type events = InferSchemaType<typeof GrafSchema>;
 type User = InferSchemaType<typeof UserSchema>;
 type Product = InferSchemaType<typeof ProductSchema>;
 type Categories = InferSchemaType<typeof CategoriesSchema>;
 
+
+export const grafModel: Model<events> = mongoose.model<events>("events", GrafSchema);
 export const UserModel: Model<User> = mongoose.model<User>("user", UserSchema);
 export const ProductModel: Model<Product> = mongoose.model<Product>(
   "Product",

@@ -36,3 +36,11 @@ export type Product = {
     alt: string;
   };
 };
+
+export type graf = {
+  _id: string;
+  product_name:string,
+  product_id: string;
+  quantity: number;
+  time: string;
+};

@@ -1,4 +1,4 @@
-import { ProductModel } from "../../configuration/mongooseSchema";
+import { grafModel, ProductModel } from "../../configuration/mongooseSchema";
 import { Product } from "../../configuration/Types";
 
 export const getProductByIdDB = async (productID: string) => {
@@ -13,6 +13,24 @@ export const getProductByIdDB = async (productID: string) => {
 export const allProductsDB = async () => {
   try {
     const products = await ProductModel.find({});
+    return products;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const dataGrafDB = async () => {
+  try {
+    const products = await grafModel.find({});
+    return products;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const grafUserDB = async (id:string) => {
+  try {
+    const products = await grafModel.find({product_id:id});
     return products;
   } catch (err) {
     return err;

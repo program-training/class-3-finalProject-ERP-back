@@ -1,4 +1,4 @@
-import { Product } from "../../configuration/Types";
+import { Product, graf } from "../../configuration/Types";
 import {
   getProductByIdDB,
   allProductsDB,
@@ -6,6 +6,8 @@ import {
   OneProductPageDB,
   deleteProductDB,
   newProductDB,
+  dataGrafDB,
+  grafUserDB,
 } from "../dall/productsDall";
 
 export const getProductById = async (id: string) => {
@@ -23,6 +25,56 @@ export const allProducts = async () => {
     const products = await allProductsDB();
     if (!products) throw new Error("no products in the database");
     return products;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const dataGraf = async () => {
+  try {
+    const data = (await dataGrafDB()) as graf[];
+    if (!data) throw new Error("no products in the database");
+    const newData: any = {};
+    for (let obj of data) {
+      let product_id = obj.product_id;
+      if (newData[product_id]) {
+        newData[product_id].quantity =
+          newData[product_id].quantity + obj.quantity;
+        newData[product_id].time.push({ time: obj.time, quantity: obj.quantity });
+      } else {
+        newData[product_id] = {
+          product_name: obj.product_name,
+          quantity: obj.quantity,
+          time: [{ time: obj.time, quantity: obj.quantity }],
+        };
+      }
+    }
+    return newData;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const grafUser = async (id:string) => {
+  try {
+    const data = (await grafUserDB(id)) as graf[];
+    if (!data) throw new Error("no products in the database");
+    const newData: any = {};
+    for (let obj of data) {
+      let product_id = obj.product_id;
+      if (newData[product_id]) {
+        newData[product_id].quantity =
+          newData[product_id].quantity + obj.quantity;
+        newData[product_id].time.push({ time: obj.time, quantity: obj.quantity });
+      } else {
+        newData[product_id] = {
+          product_name: obj.product_name,
+          quantity: obj.quantity,
+          time: [{ time: obj.time, quantity: obj.quantity }],
+        };
+      }
+    }
+    return newData;
   } catch (error) {
     return Promise.reject(error);
   }

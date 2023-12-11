@@ -8,6 +8,8 @@ import {
   OneProductPage,
   allProducts,
   newProduct,
+  dataGraf,
+  grafUser,
 } from "../service/productsService";
 
 export const allProductsC = async (args:any) => {
@@ -16,6 +18,25 @@ export const allProductsC = async (args:any) => {
     return (allProduct);
   } catch (error) {
     if (error instanceof Error) return error.message;
+  }
+};
+
+export const dataGrafC = async (args:any) => {
+  try {
+    const data = await dataGraf();
+    return data
+  } catch (error) {
+    if (error instanceof Error) return  error.message;
+  }
+};
+
+export const grafUserC = async (args:any) => {
+  const id = args.id
+  try {
+    const data = await grafUser(id);
+    return data
+  } catch (error) {
+    if (error instanceof Error) return  error.message;
   }
 };
 

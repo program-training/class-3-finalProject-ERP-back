@@ -6,8 +6,19 @@ type Query {
   OneProductPage(page:Int):[Product]
   getProductById(id:String):Product
   externalProducts(search: String): [Product]
+  graf:[Graf]
+  grafUser(id:String):Graf
   externalCategories: [Category]
   externalCategory(id: String!): Category
+}
+
+
+type Graf  {
+  _id: String
+  product_name: String
+  product_id: String
+  quantity: Int
+  time: String
 }
 
 type Image {
