@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH
-                    checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                    checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/program-training/class-3-finalProject-ERP-back.git']]])
                 }
             }
         }
