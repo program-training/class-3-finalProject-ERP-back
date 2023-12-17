@@ -49,7 +49,7 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
-                    context: 'claas3-erp-back,
+                    context: 'claas3-erp-back',
                     message: 'Lint failed  run npm run lint to see errors',
                 )
             }
