@@ -83,7 +83,7 @@ export const dataGraf = async () => {
 
 export const grafUser = async (id:string) => {
   try {
-    const data = (await grafUserDB(id)) as graf[];
+    const data = (await grafUser(id)) as graf[];
     if (!data) throw new Error("no products in the database");
     const newData: any = {};
     for (let obj of data) {
