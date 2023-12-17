@@ -39,7 +39,7 @@ pipeline {
                 echo 'Linting passed. You may now merge.'
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
-                    context: 'class3_erp_back_lint',
+                    context: 'claas3-erp-back',
                     message: 'Lint passed',
                 )
             }
@@ -49,7 +49,7 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
-                    context: 'class3_erp_back_lint',
+                    context: 'claas3-erp-back,
                     message: 'Lint failed  run npm run lint to see errors',
                 )
             }
