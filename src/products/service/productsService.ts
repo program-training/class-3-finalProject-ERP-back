@@ -7,8 +7,16 @@ import {
   deleteProductDB,
   newProductDB,
   dataGrafDB,
-  grafUserDB,
 } from "../dall/productsDall";
+
+const products = [
+  { name: "gilad", nam: 4 },
+  { name: "gilad", nam: 4 },
+  { name: "gilad", nam: 4 },
+  { name: "sinai", nam: 4 },
+  { name: "sinai", nam: 4 },
+  { name: "sinai", nam: 4 },
+];
 
 export const getProductById = async (id: string) => {
   try {
@@ -55,39 +63,16 @@ export const dataGraf = async () => {
   }
 };
 
-export const grafUser = async (id:string) => {
-  try {
-    const data = (await grafUserDB(id)) as graf[];
-    if (!data) throw new Error("no products in the database");
-    const newData: any = {};
-    for (let obj of data) {
-      let product_id = obj.product_id;
-      if (newData[product_id]) {
-        newData[product_id].quantity =
-          newData[product_id].quantity + obj.quantity;
-        newData[product_id].time.push({ time: obj.time, quantity: obj.quantity });
-      } else {
-        newData[product_id] = {
-          product_name: obj.product_name,
-          quantity: obj.quantity,
-          time: [{ time: obj.time, quantity: obj.quantity }],
-        };
-      }
-    }
-    return newData;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+
 
 export const OneProductPage = async (page: number) => {
   const ProductPlacement = page * 12;
   try {
-    const productד = (await OneProductPageDB(ProductPlacement)) as Product[];
-    if (productד?.length === 0) {
+    const product = (await OneProductPageDB(ProductPlacement)) as Product[];
+    if (product?.length === 0) {
       throw new Error("no mor product in the database");
     }
-    return productד;
+    return product;
   } catch (error) {
     return Promise.reject(error);
   }

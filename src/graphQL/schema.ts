@@ -14,12 +14,15 @@ type Query {
 
 
 type Graf  {
-  _id: String
   product_name: String
-  product_id: String
   quantity: Int
-  time: String
+  time: [Time2]
 }
+type Time2 {
+  time: String
+  quantity: Int
+}
+
 
 type Image {
   large: String

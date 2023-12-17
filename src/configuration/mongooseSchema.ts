@@ -1,4 +1,5 @@
 import mongoose, { Schema, InferSchemaType, Document, Model } from "mongoose";
+import { number } from "yup";
 
 const UserSchema = new Schema({
   user_name: { type: String, required: true },
@@ -28,16 +29,15 @@ const ProductSchema = new Schema({
 
 const GrafSchema = new Schema({
   product_id: { type: String, required: true },
-  afteter: { type: Number, required: true },
-  before: { type: Number, required: true },
-  changes:{ type: [Number], required: true },
+  product_name: { type: String, required: true },
+  quantity: { type: Number, required: true },
   time:{ type: String, required: true },
 });
 
-type events = InferSchemaType<typeof GrafSchema>;
 type User = InferSchemaType<typeof UserSchema>;
 type Product = InferSchemaType<typeof ProductSchema>;
 type Categories = InferSchemaType<typeof CategoriesSchema>;
+type events = InferSchemaType<typeof GrafSchema>;
 
 
 export const grafModel: Model<events> = mongoose.model<events>("events", GrafSchema);
