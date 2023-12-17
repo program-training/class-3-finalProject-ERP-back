@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { graphqlHTTP } from "express-graphql";
 import { schema } from "./graphQL/schema";
 import { root } from "./graphQL/rootValue";
+import { connectRedic } from "./configuration/redis";
 
 
 const port = process.env.PORT;
@@ -25,5 +26,6 @@ app.use(
 
 app.listen(port, async () => {
   await connectToDatabase();
+  await connectRedic()
   console.log(`Server is up and running on port ${port}`);
 });
