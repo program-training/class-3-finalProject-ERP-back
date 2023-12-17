@@ -27,7 +27,7 @@ pipeline {
         stage('server lint') {
             steps {
                 script {
-                        sh 'echo "Linting.."'
+                        sh 'echo "Linting..."'
                         sh 'npm run lint'
                 }
             }
