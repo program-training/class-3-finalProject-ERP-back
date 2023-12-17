@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                         sh 'echo "Building..."'
-                        sh 'docker build -t banner-front .'
+                        sh 'docker build -t erp-back .'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
                 echo 'Linting passed. You may now merge.'
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
-                    context: 'class3_banner_front_lint',
+                    context: 'class3_erp_back_lint',
                     message: 'Build passed',
                 )
             }
@@ -34,7 +34,7 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
-                    context: 'class3_banner_front_lint',
+                    context: 'class3_erp_back_lint',
                     message: 'Build failed  run npm run build to see errors',
                 )
             }
