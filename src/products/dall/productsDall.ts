@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import { ProductModel, grafModel } from "../../configuration/mongooseSchema";
+import { ProductModel } from "../../configuration/mongooseSchema";
 import { Product } from "../../configuration/Types";
 
 const data = [
@@ -52,18 +51,6 @@ export const allProductsDB = async () => {
     return err;
   }
 };
-
-export const dataGrafDB = async () => { 
-  try {
-    const data1 = await grafModel.find({})
-    const products = data1;
-    return products;
-  } catch (err) {
-    return err;
-  }
-};
-
-
 
 export const OneProductPageDB = async (ProductPlacement: number) => {
   try {

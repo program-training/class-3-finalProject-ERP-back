@@ -7,6 +7,7 @@ import {
   deleteProductDB,
   newProductDB,
   dataGrafDB,
+  grafUserDB,
 } from "../dall/productsDall";
 const arr = [
   { name: "gilad", nam: 4 },
@@ -38,9 +39,33 @@ export const allProducts = async () => {
 };
 
 export const dataGraf = async () => {
-  console.log("gilad");
   try {
     const data = (await dataGrafDB()) as graf[];
+    if (!data) throw new Error("no products in the database");
+    const newData: any = {};
+    for (let obj of data) {
+      let product_id = obj.product_id;
+      if (newData[product_id]) {
+        newData[product_id].quantity =
+          newData[product_id].quantity + obj.quantity;
+        newData[product_id].time.push({ time: obj.time, quantity: obj.quantity });
+      } else {
+        newData[product_id] = {
+          product_name: obj.product_name,
+          quantity: obj.quantity,
+          time: [{ time: obj.time, quantity: obj.quantity }],
+        };
+      }
+    }
+    return newData;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const grafUser = async (id:string) => {
+  try {
+    const data = (await grafUserDB(id)) as graf[];
     if (!data) throw new Error("no products in the database");
     const newData: any = {};
     for (let obj of data) {
