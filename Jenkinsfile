@@ -9,11 +9,26 @@ pipeline {
                 }
             }
         }
-        stage('client build') {
+        stage('clean work space'){
+            steps{
+                script {
+                    sh 'npm cache clean --force'
+                }
+            }
+        }
+         stage('Install Dependencies') {
             steps {
                 script {
-                        sh 'echo "Building..."'
-                        sh 'docker build -t erp-back .'
+                    echo 'Installing dependencies...'
+                    sh 'npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint'
+                }
+            }
+        }
+        stage('server lint') {
+            steps {
+                script {
+                        sh 'echo "Linting..."'
+                        sh 'npm run lint'
                 }
             }
         }
@@ -25,7 +40,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
                     context: 'class3_erp_back_lint',
-                    message: 'Build passed',
+                    message: 'Lint passed',
                 )
             }
         }
@@ -35,7 +50,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
                     context: 'class3_erp_back_lint',
-                    message: 'Build failed  run npm run build to see errors',
+                    message: 'Lint failed  run npm run lint to see errors',
                 )
             }
         }
