@@ -37,6 +37,22 @@ export type Product = {
   };
 };
 
+export type ProductR = {
+  _id: string;
+  name: string;
+  salePrice: number;
+  quantity: number;
+  description: string;
+  category: string;
+  discountPercentage: number;
+  image: {
+    large: string;
+    medium: string;
+    small: string;
+    alt: string;
+  };
+};
+
 export type graf = {
   _id: string;
   product_name:string,
