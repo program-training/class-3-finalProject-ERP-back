@@ -9,7 +9,6 @@ import {
   allProducts,
   newProduct,
   dataGraf,
-  grafUser,
 } from "../service/productsService";
 
 export const allProductsC = async (args:any) => {
@@ -21,23 +20,20 @@ export const allProductsC = async (args:any) => {
   }
 };
 
-export const dataGrafC = async (args:any) => {
+export const dataGrafC = async () => {
   try {
-    const data = await dataGraf();
-    return data
+    const data = await dataGraf();    
+    // const result = Object.entries(data).map(([key, value]) => ({ [key]: value }));
+    const arrayWithoutKeys = Object.values(data) as any
+    console.log(arrayWithoutKeys);
+    return arrayWithoutKeys
   } catch (error) {
     if (error instanceof Error) return  error.message;
   }
 };
 
 export const grafUserC = async (args:any) => {
-  const id = args.id
-  try {
-    const data = await grafUser(id);
-    return data
-  } catch (error) {
-    if (error instanceof Error) return  error.message;
-  }
+  return null
 };
 
 export const getProductByIdC = async (args:any) => {

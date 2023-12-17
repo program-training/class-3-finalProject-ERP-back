@@ -5,8 +5,6 @@ export type userData = {
 export type userFromDB = {
   user_name: string;
   password: string;
-  _id: object | string;
-  __v: number;
 };
 
 export type ordersErrors = {

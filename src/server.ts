@@ -2,6 +2,8 @@ import express from "express";
 import { corsOrigin as cors } from "./cors/cors";
 import { connectToDatabase } from "./configuration/mongoDB";
 import dotenv from "dotenv";
+import { Authentication } from "./products/midelweresProducts/Authentication";
+import { connectPostGres, crateTrigger } from "./configuration/postGres";
 import { graphqlHTTP } from "express-graphql";
 import { schema } from "./graphQL/schema";
 import { root } from "./graphQL/rootValue";
