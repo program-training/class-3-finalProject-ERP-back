@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { userData } from "../../configuration/Types";
-import { signUp } from "../service/useService";
+import { startAndEndDate, userData } from "../../configuration/Types";
+import { signUp, getRegistrationData } from "../service/useService";
 import { getToken } from "../../services/apiServices";
 import { handleError } from "../../utils/handleErrors";
 
@@ -20,6 +20,17 @@ export const logInC = async (args: any) => {
     const token = await getToken(user);
     return token;
   } catch (error) {
+    throw error
+  }
+};
+
+
+export const registerDataC = async (args: startAndEndDate) => {
+  try {
+    const dates = args;
+    const data = getRegistrationData(dates)
+    return data
+  }  catch (error) {
     throw error
   }
 };
