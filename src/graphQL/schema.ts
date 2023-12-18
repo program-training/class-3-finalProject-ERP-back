@@ -10,6 +10,7 @@ type Query {
   grafUser(id:String):Graf
   externalCategories: [Category]
   externalCategory(id: String!): Category
+  registerData(start: String! end: String!): [Days]
 }
 
 
@@ -22,7 +23,10 @@ type Time2 {
   time: String
   quantity: Int
 }
-
+type Days {
+  login_day: String  
+  login_count: Int
+}
 
 type Image {
   large: String
@@ -90,4 +94,4 @@ input productToUpdateInput  {
         alt: String
     }
 
-`);
+`); 
