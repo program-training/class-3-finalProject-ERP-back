@@ -36,9 +36,7 @@ const data = [
 
 export const getProductByIdDB = async (productID: string) => {
   try {
-    console.log(productID)
-    const product = await ProductModel.find({"_id":productID});
-    console.log(product)
+    const product = await ProductModel.findById(productID);
     return product;
   } catch (error) {
     return error;
