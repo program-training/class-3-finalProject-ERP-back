@@ -7,6 +7,13 @@ export type userFromDB = {
   password: string;
 };
 
+export type startAndEndDate = {
+  start: string;
+  end: string;
+};
+
+
+
 export type ordersErrors = {
   error: string;
 };

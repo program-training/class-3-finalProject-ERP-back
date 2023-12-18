@@ -1,6 +1,6 @@
-import { userData } from "../../configuration/Types";
+import { startAndEndDate, userData } from "../../configuration/Types";
 import { client } from "../../configuration/redis";
-import { getUserByUserNameDB, signUpDB } from "../dall/userDall";
+import { getUserByUserNameDB, signUpDB, getRegistrationDataFromDB } from "../dall/userDall";
 
 export const signUp = async (user: userData) => {
   try {
@@ -12,6 +12,16 @@ export const signUp = async (user: userData) => {
     } else {
       return Promise.reject(new Error("user is Already exists"));
     }
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+
+export const getRegistrationData = async (dates: startAndEndDate) => {
+  try {
+    const data = getRegistrationDataFromDB(dates)
+    return data
   } catch (error) {
     return Promise.reject(error);
   }

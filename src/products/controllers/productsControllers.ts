@@ -76,7 +76,7 @@ export const deleteProductC = async (args: any) => {
     const deleteOne = await deleteProduct(id);
     return deleteOne;
   } catch (error) {
-    if (error instanceof Error) return error.message;
+    throw error
   }
 };
 
@@ -86,7 +86,7 @@ export const newProductC = async (args: any) => {
     const NewProduct = await newProduct(productInput);
     return NewProduct;
   } catch (error) {
-    if (error instanceof Error) return error.message;
+    if (error instanceof Error) return error.message
   }
 };
 
@@ -98,8 +98,8 @@ export const editProductC = async (args: any) => {
     const editProduct = await editProductS(product, id);
     return editProduct;
   } catch (error) {
-    if (error instanceof Error) console.log(error.message);
-
-    if (error instanceof Error) return error.message;
+    if (error instanceof Error)console.log(error.message);
+    
+    if (error instanceof Error) return error.message
   }
 };
