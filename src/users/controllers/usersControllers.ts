@@ -30,7 +30,7 @@ export const registerDataC = async (args: startAndEndDate) => {
     const dates = args;
     const data = getRegistrationData(dates)
     return data
-  } catch (error) {
-    if (error instanceof Error) return error.message;
+  }  catch (error) {
+    throw error
   }
 };
