@@ -36,15 +36,17 @@ const data = [
 
 export const getProductByIdDB = async (productID: string) => {
   try {
-    const product = await ProductModel.findById(productID);
+    console.log(productID)
+    const product = await ProductModel.find({"_id":productID});
+    console.log(product)
     return product;
   } catch (error) {
     return error;
   }
 };
-export const dataGrafDB = async () => { 
+export const dataGrafDB = async () => {
   try {
-    const data1 = await grafModel.find({})
+    const data1 = await grafModel.find({});
     const products = data1;
     return products;
   } catch (err) {

@@ -11,25 +11,25 @@ import {
 } from "../service/servicesExternalPoints";
 
 export const getAllProductsC = async (args: any) => {
-  const search = args.search
+  const search = args.search;
   try {
     if (!search) {
       const allProduct = await allProducts();
-      return allProduct
+      return allProduct;
     } else {
       const result = await getProductsByQuery(search);
-      return result
+      return result;
     }
   } catch (error) {
-    if (error instanceof Error) return error.message
+    if (error instanceof Error) return error.message;
   }
 };
 
-export const updateInventoryC = async (args:any) => {
-  const product = args.up
+export const updateInventoryC = async (args: any) => {
+  const product = args.up;
   try {
     const data = await updateInventory(product);
-    return(data);
+    return data;
   } catch (error) {
     if (error instanceof Error) return error.message;
   }

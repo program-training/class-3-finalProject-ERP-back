@@ -50,6 +50,7 @@ input productToUpdateInput  {
 }
 
       type Category {
+        _id:String
         name: String
         img: String
       }

@@ -1,5 +1,8 @@
 import { productUpdate } from "../../configuration/Types";
-import { CategoriesModel, ProductModel } from "../../configuration/mongooseSchema";
+import {
+  CategoriesModel,
+  ProductModel,
+} from "../../configuration/mongooseSchema";
 
 export const updateDB = async (productUpdate: productUpdate) => {
   try {

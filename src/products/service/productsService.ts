@@ -1,7 +1,11 @@
 import { json } from "express";
 import { Product, ProductR, graf } from "../../configuration/Types";
 import { client } from "../../configuration/redis";
-import { allProductsR, getProductByIdR } from "../../redis/redisFunc";
+import {
+  allProductsR,
+  delitePages,
+  getProductByIdR,
+} from "../../redis/redisFunc";
 import {
   getProductByIdDB,
   allProductsDB,
@@ -81,7 +85,7 @@ export const dataGraf = async () => {
   }
 };
 
-export const grafUser = async (id:string) => {
+export const grafUser = async (id: string) => {
   try {
     const data = (await grafUser(id)) as graf[];
     if (!data) throw new Error("no products in the database");
@@ -91,7 +95,10 @@ export const grafUser = async (id:string) => {
       if (newData[product_id]) {
         newData[product_id].quantity =
           newData[product_id].quantity + obj.quantity;
-        newData[product_id].time.push({ time: obj.time, quantity: obj.quantity });
+        newData[product_id].time.push({
+          time: obj.time,
+          quantity: obj.quantity,
+        });
       } else {
         newData[product_id] = {
           product_name: obj.product_name,
@@ -123,6 +130,7 @@ export const deleteProduct = async (id: string) => {
   try {
     const deleteOne = await deleteProductDB(id);
     if (!deleteOne) throw new Error("no such product in the database");
+    delitePages();
     return deleteOne;
   } catch (error) {
     return Promise.reject(error);
@@ -133,6 +141,7 @@ export const newProduct = async (product: ProductR) => {
   try {
     const newProduct = await newProductDB(product);
     await client.json.set(product._id, ".", product);
+    delitePages();
     return newProduct;
   } catch (error) {
     return Promise.reject(error);
@@ -142,6 +151,7 @@ export const newProduct = async (product: ProductR) => {
 export const editProductS = async (product: Product, id: string) => {
   try {
     const editProduct = await editProductDB(product, id);
+    delitePages();
     return editProduct;
   } catch (error) {
     return Promise.reject(error);
