@@ -3,17 +3,20 @@ import { OneProductPageC, allProductsC, dataGrafC, deleteProductC, editProductC,
 import { logInC, signUpC } from "../users/controllers/usersControllers";
 
 export const root = {
-    logIn: logInC,
-    signUp: signUpC,
-    allProducts: allProductsC,
-    OneProductPage: OneProductPageC,
-    getProductById: getProductByIdC,
-    graf:dataGrafC,
+    logIn: logInC, //1
+    signUp: signUpC, //1
+    allProducts: allProductsC, //1
+
+
+    
+    OneProductPage: OneProductPageC, //0
+    getProductById: getProductByIdC, //1
+    graf:dataGrafC, 
     grafUser:grafUserC,
-    deleteProduct: deleteProductC,
-    ExternalUpdateInventory: updateInventoryC,
-    externalProducts: getAllProductsC,
-    newProduct: newProductC,
+    deleteProduct: deleteProductC, //0
+    ExternalUpdateInventory: updateInventoryC, 
+    externalProducts: getAllProductsC, //0
+    newProduct: newProductC, //1
     editProduct: editProductC,
     externalCategories: getCategoriesC,
     externalCategory: getCategoryByIdC,

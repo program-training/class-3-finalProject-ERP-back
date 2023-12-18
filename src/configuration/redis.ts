@@ -1,5 +1,5 @@
 import { createClient } from 'redis';
-const client = createClient({
+export const client = createClient({
     password: 'nrLfaj4HsXC260VadBGMwFHtHB00jhzb',
     socket: {
         host: 'redis-15945.c323.us-east-1-2.ec2.cloud.redislabs.com',
