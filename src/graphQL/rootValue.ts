@@ -14,11 +14,12 @@ import {
   grafUserC,
   newProductC,
 } from "../products/controllers/productsControllers";
-import { logInC, signUpC } from "../users/controllers/usersControllers";
+import { logInC, signUpC, registerDataC } from "../users/controllers/usersControllers";
 
 export const root = {
   logIn: logInC, //1
   signUp: signUpC, //1
+  registerData: registerDataC,
   allProducts: allProductsC, //1
   OneProductPage: OneProductPageC, //1
   getProductById: getProductByIdC, //1
