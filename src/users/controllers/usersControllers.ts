@@ -20,8 +20,6 @@ export const logInC = async (args: any) => {
     const token = await getToken(user);
     return token;
   } catch (error) {
-    if (error instanceof Error) return error.message;
-
-    // if (error instanceof Error) return handleError(res, error, 400);
+    throw error
   }
 };

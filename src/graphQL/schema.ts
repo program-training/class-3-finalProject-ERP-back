@@ -33,11 +33,11 @@ type Image {
 type Product  {
   _id:String
   name: String
-  salePrice: Int
-  quantity: Int
+  salePrice: Float  
+  quantity: Float  
   description: String
   category: String
-  discountPercentage: Int
+  discountPercentage: Float  
   image:Image
 }
 type productToUpdate  {
