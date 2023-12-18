@@ -11,7 +11,7 @@ export const signUpC = async (args: userData) => {
     const token = await getToken(newUser);
     return token;
   } catch (error) {
-    if (error instanceof Error) return error.message;
+    throw error
   }
 };
 export const logInC = async (args: any) => {
