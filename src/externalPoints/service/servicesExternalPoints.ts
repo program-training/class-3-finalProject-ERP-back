@@ -11,13 +11,21 @@ import {
   ordersErrors,
   productToUpdate,
 } from "../../configuration/Types";
+import {
+  delitePages,
+  getCategoriesR,
+  getCategoryByIdR,
+} from "../../redis/redisFunc";
+import { client } from "../../configuration/redis";
 
 export const updateInventory = async (products: productToUpdate[]) => {
   try {
     const updates: productToUpdate[] = [];
     const toUpdates: ordersErrors[] = [];
     for (const product of products) {
-      const dataProduct = (await getProductByIdDB(product.productId)) as Product;
+      const dataProduct = (await getProductByIdDB(
+        product.productId
+      )) as Product;
       if (!dataProduct) {
         toUpdates.push({
           error: `No such product in the database: ${product.productId}`,
@@ -43,6 +51,7 @@ export const updateInventory = async (products: productToUpdate[]) => {
           if (update) updates.push(product);
         }
       }
+      delitePages();
       return updates;
     }
     return toUpdates;
@@ -62,8 +71,14 @@ export const getProductsByQuery = async (search: string) => {
 
 export const getCategories = async () => {
   try {
-    const categories = await getCategoriesDB();
-    return categories;
+    const categories = await getCategoriesR();
+    if (categories) {
+      return categories;
+    } else {
+      const categories = await getCategoriesDB();
+      await client.json.set(`getCategoriesR`, ".", categories as any);
+      return categories;
+    }
   } catch (error) {
     return Promise.reject(error);
   }
@@ -71,9 +86,15 @@ export const getCategories = async () => {
 
 export const getCategoryById = async (categoryID: string) => {
   try {
-    const category = await getCategoryByIdDB(categoryID);
-    if (!category) throw new Error("no  category in the database");
-    return category;
+    const category = await getCategoryByIdR(categoryID);
+    if (category) {
+      return category;
+    } else {
+      const category = await getCategoryByIdDB(categoryID);
+      if (!category) throw new Error("no  category in the database");
+      await client.json.set(`getCategor_${categoryID}`, ".", category as any);
+      return category;
+    }
   } catch (error) {
     return Promise.reject(error);
   }

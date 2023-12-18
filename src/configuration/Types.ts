@@ -5,9 +5,14 @@ export type userData = {
 export type userFromDB = {
   user_name: string;
   password: string;
-  _id: object | string;
-  __v: number;
 };
+
+export type startAndEndDate = {
+  start: string;
+  end: string;
+};
+
+
 
 export type ordersErrors = {
   error: string;
@@ -35,4 +40,28 @@ export type Product = {
     small: string;
     alt: string;
   };
+};
+
+export type ProductR = {
+  _id: string;
+  name: string;
+  salePrice: number;
+  quantity: number;
+  description: string;
+  category: string;
+  discountPercentage: number;
+  image: {
+    large: string;
+    medium: string;
+    small: string;
+    alt: string;
+  };
+};
+
+export type graf = {
+  _id: string;
+  product_name:string,
+  product_id: string;
+  quantity: number;
+  time: string;
 };
