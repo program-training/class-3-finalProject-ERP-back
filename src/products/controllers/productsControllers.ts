@@ -1,6 +1,7 @@
 // import { Request, Response } from "express";
 // import { Product } from "../../configuration/Types";
 // import { handleError } from "../../utils/handleErrors";
+import { object } from "yup";
 import {
   deleteProduct,
   editProductS,
@@ -11,10 +12,10 @@ import {
   dataGraf,
 } from "../service/productsService";
 
-export const allProductsC = async (args:any) => {
+export const allProductsC = async () => {
   try {
     const allProduct = await allProducts();
-    return (allProduct);
+    return allProduct;
   } catch (error) {
     if (error instanceof Error) return error.message;
   }
@@ -25,28 +26,27 @@ export const dataGrafC = async () => {
     const data = await dataGraf();    
     // const result = Object.entries(data).map(([key, value]) => ({ [key]: value }));
     const arrayWithoutKeys = Object.values(data) as any
-    console.log(arrayWithoutKeys);
     return arrayWithoutKeys
   } catch (error) {
     if (error instanceof Error) return  error.message;
   }
 };
 
-export const grafUserC = async (args:any) => {
+export const grafUserC = async () => {
   return null
 };
 
-export const getProductByIdC = async (args:any) => {
+export const getProductByIdC = async (_:any, args:any) => {
   const {id} = args
   try {
     const product = await getProductById(id);
     return(product);
   } catch (error) {
-    if (error instanceof Error) return error.message;
+    throw error
   }
 };
 
-export const OneProductPageC = async (args:any) => {
+export const OneProductPageC = async (_:any, args:any) => {
   const page = args.page;
   try {
     const Products = await OneProductPage(page);
@@ -56,7 +56,7 @@ export const OneProductPageC = async (args:any) => {
   }
 };
 
-export const deleteProductC = async (args:any) => {
+export const deleteProductC = async (_:any, args:any) => {
   const id = args.id;
   try {
     const deleteOne = await deleteProduct(id);
@@ -66,7 +66,7 @@ export const deleteProductC = async (args:any) => {
   }
 };
 
-export const newProductC = async (args: any) => {
+export const newProductC = async (_:any,args: any) => {
   try {
     const { productInput } = args
     const NewProduct = await newProduct(productInput);
@@ -77,17 +77,12 @@ export const newProductC = async (args: any) => {
 };
 
 export const editProductC = async (args: any) => {
-  const { productInput } = args
-  const id = productInput._id
-  const product = productInput
+  const id = args._id
+  const product = args
   try {
     const editProduct = await editProductS(product, id);
-    console.log();
-    
     return editProduct
   } catch (error) {
-    if (error instanceof Error)console.log(error.message);
-    
-    if (error instanceof Error) return error.message
+    throw error
   }
 };

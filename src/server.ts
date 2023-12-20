@@ -1,33 +1,54 @@
 import express from "express";
-import { corsOrigin as cors } from "./cors/cors";
-import { connectToDatabase } from "./configuration/mongoDB";
-import dotenv from "dotenv";
-import { Authentication } from "./products/midelweresProducts/Authentication";
-import { connectPostGres, crateTrigger } from "./configuration/postGres";
-import { graphqlHTTP } from "express-graphql";
-import { schema } from "./graphQL/schema";
-import { root } from "./graphQL/rootValue";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import mongoose from "mongoose";
+import { createServer } from "http";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { typeDefs } from "./graphQL/schema";
+import { resolvers } from "./graphQL/rootValue";
+import cors from "cors";
 import { connectRedic } from "./configuration/redis";
 
+async function startServer() {
+  const app = express();
+  const httpServer = createServer(app);
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/graphql'
+  });
 
-const port = process.env.PORT;
-dotenv.config();
-export const app = express();
+  const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const serverCleanup = useServer({ schema }, wsServer);
 
-app.use(cors);
+  const apolloServer = new ApolloServer({
+    schema,
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      {
+        async serverWillStart() {
+          return {
+            async drainServer() {
+              await serverCleanup.dispose();
+            },
+          };
+        },
+      },
+    ]
+  });
+  await apolloServer.start();
+  app.use(express.json())
+  app.use(cors())
+  app.use("/graphql", express.json(),cors(), expressMiddleware(apolloServer));
+   
+  const PORT = 4000;
+  await mongoose.connect("mongodb+srv://Davidk:David123@cluster0.llwz20q.mongodb.net/ERP-final-project?retryWrites=true&w=majority");
+  httpServer.listen(PORT, async () => {
+    await connectRedic()
+    console.log(`server is listening on port ${PORT}`);
+  });
+}
 
-
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    rootValue: root,
-    graphiql: true,
-  })
-);
-
-app.listen(port, async () => {
-  await connectToDatabase();
-  await connectRedic()
-  console.log(`Server is up and running on port ${port}`);
-});
+startServer();

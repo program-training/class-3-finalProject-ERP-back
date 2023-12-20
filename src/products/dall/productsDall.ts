@@ -92,6 +92,8 @@ export const newProductDB = async (product: Product) => {
 
 export const editProductDB = async (product: Product, id: string) => {
   try {
+    console.log(product, id);
+    
     const editProduct = await ProductModel.findByIdAndUpdate(id, product);
     return editProduct;
   } catch {

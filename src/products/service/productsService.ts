@@ -37,7 +37,7 @@ export const getProductById = async (id: string) => {
       return product;
     }
   } catch (error) {
-    return Promise.reject(error);
+    throw error
   }
 };
 
@@ -154,7 +154,7 @@ export const editProductS = async (product: Product, id: string) => {
     delitePages();
     return editProduct;
   } catch (error) {
-    return Promise.reject(error);
+    throw error
   }
 };
 

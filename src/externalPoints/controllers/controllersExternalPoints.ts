@@ -10,7 +10,7 @@ import {
   getProductsByCategory,
 } from "../service/servicesExternalPoints";
 
-export const getAllProductsC = async (args: any) => {
+export const getAllProductsC = async (_:any,args: any) => {
   const search = args.search;
   try {
     if (!search) {

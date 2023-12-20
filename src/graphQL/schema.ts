@@ -1,6 +1,5 @@
-import { buildSchema } from "graphql";
 
-export const schema = buildSchema(`
+export const typeDefs = `
 type Query {
   allProducts:[Product]
   OneProductPage(page:Int):[Product]
@@ -8,11 +7,27 @@ type Query {
   externalProducts(search: String): [Product]
   graf:[Graf]
   grafUser(id:String):Graf
+  registerData: [Days]
   externalCategories: [Category]
   externalCategory(id: String!): Category
-  registerData(start: String! end: String!): [Days]
 }
 
+
+type Mutation {
+  ExternalUpdateInventory(up:productToUpdateInput):[productToUpdate]
+  updateInventory(up:productToUpdateInput):[productToUpdate]
+  deleteProduct(id:String):Product
+  logIn(user_name: String! password:String!):String
+  signUp(user_name: String! password:String!):String
+newProduct(productInput: ProductInput!):Product
+editProduct(productInput: editProductInput!):Product
+}
+
+
+type Subscription {
+  graf:[Graf]
+  registerData: [Days]
+}
 
 type Graf  {
   product_name: String
@@ -58,14 +73,7 @@ input productToUpdateInput  {
         name: String
         img: String
       }
-    type Mutation {
-      updateInventory(up:productToUpdateInput):[productToUpdate]
-      deleteProduct(id:String):Product
-      logIn(user_name: String! password:String!):String
-      signUp(user_name: String! password:String!):String
-    newProduct(productInput: ProductInput!):Product
-    editProduct(productInput: editProductInput!):Product
-    }
+
     input ProductInput {
     name: String
     salePrice: Int
@@ -95,4 +103,4 @@ input productToUpdateInput  {
         alt: String
     }
 
-`); 
+`
